@@ -85,16 +85,14 @@ public class Ticket {
 
 	public void printTicket() {
 		System.out.println("PRINTING TICKET" );
-		StringBuilder result = new StringBuilder();
+		String result = "";
 		for(int i = 0; i < rows; i++){
 			for(int j = 0; j < columns ; j++){
-				result.append(ticketData.get(i).get(j).getNumber());
-				result.append("-");
-				result.append(ticketData.get(i).get(j).getIsCalled());
-				result.append("   ");
+				result += ticketData.get(i).get(j).getNumber() + "-" + ticketData.get(i).get(j).getIsCalled() + "   ";
 			}
-			System.out.println(result.toString());
+			System.out.println(result);
 			System.out.println();
+			result ="";
 			System.out.println();
 		}
 	}
