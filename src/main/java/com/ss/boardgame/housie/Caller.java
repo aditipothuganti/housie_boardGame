@@ -1,4 +1,6 @@
 package com.ss.boardgame.housie;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -7,51 +9,49 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Caller {
+
+    private int numberRange, numOfPlayers, rowsOfTicket, columnsOfTicket, numOfValuesPerRow = 0;
+    private List<String> earlyFiveWinningPlayers = new ArrayList<>();
+    private List<String> topLineWinningPlayers = new ArrayList<>();
+    private List<String> fullHouseWinningPlayers = new ArrayList<>();
     private List<Ticket> ticketsInPlay;
     private HousieBoard housieBoard;
     private List<Player> playersInPlay;
     private GameStatus gameStatus;
     private WinnersList winnersList;
-    private int numberRange, numOfPlayers, rowsOfTicket, columnsOfTicket, numOfValuesPerRow = 0;
-    private List<String> earlyFiveWinningPlayers = new ArrayList<>();
-    private List<String> topLineWinningPlayers = new ArrayList<>();
-    private List<String> fullHouseWinningPlayers = new ArrayList<>();
 
+    @Autowired
+    private final UserInputs userInputs;
 
-    public void startPlaying() {
+    public Caller(UserInputs userInputs) {
+        this.userInputs = userInputs;
+        this.numberRange = userInputs.getNumberRange();
+        this.numOfPlayers = userInputs.getNumOfPlayers();
+        this.rowsOfTicket = userInputs.getRowsOfTicket();
+        this.columnsOfTicket = userInputs.getColumnsOfTicket();
+        this.numOfValuesPerRow = userInputs.getNumOfValuesPerRow();
+    }
+
+    public String startPlaying() {
+        housieBoard = new HousieBoard(numberRange);
         ticketsInPlay = new ArrayList<>();
         playersInPlay = new ArrayList<>();
-        //--------------User Inputs-----------//
-        Scanner s = new Scanner(System.in);
-        System.out.println("Enter the number range");
-        numberRange = s.nextInt();
-        housieBoard = new HousieBoard(numberRange);
         gameStatus = GameStatus.INPROGRESS;
         winnersList = new WinnersList();
-        System.out.println("Number of players");
-        numOfPlayers = s.nextInt();
-        System.out.println("Number of rows");
-        rowsOfTicket = s.nextInt();
-        System.out.println("Number of columns");
-        columnsOfTicket = s.nextInt();
-        System.out.println("Number of values per row");
-        numOfValuesPerRow = s.nextInt();
-        while ((rowsOfTicket * numOfValuesPerRow) > numberRange || numOfValuesPerRow > columnsOfTicket) {
-            System.out.println("ERROR! Enter valid input");
-            System.out.println("Number of rows");
-            rowsOfTicket = s.nextInt();
-            System.out.println("Number of columns");
-            columnsOfTicket = s.nextInt();
-            System.out.println("Number of values per row");
-            numOfValuesPerRow = s.nextInt();
-        }
+        Scanner scanner = new Scanner(System.in);
+        String result = "";
         generatePlayers();
-
-        while (housieBoard.numbersMarkedTillNow <= housieBoard.totalNumbersInHousieBoard && gameStatus == GameStatus.INPROGRESS) {
+        while (housieBoard.numbersMarkedTillNow <= housieBoard.totalNumbersInHousieBoard && gameStatus == GameStatus.INPROGRESS && result.isEmpty()) {
             System.out.println("Enter N to generate Number");
-            char enterCharacter = s.next().charAt(0);
+            char enterCharacter = scanner.next().charAt(0);
             if (enterCharacter == 'N' || enterCharacter == 'n') {
-                generateNumber();
+                int generatedNumber = generateNumber();
+                if (result.isEmpty()) {
+                    result = markAllTicketsWithGeneratedNumber(generatedNumber);
+                } else {
+                    System.out.println("All winners will be announced");
+                    gameStatus = GameStatus.GAMEOVER;
+                }
             }
             if (enterCharacter == 'Q' || enterCharacter == 'q') {
                 gameStatus = GameStatus.GAMEOVER;
@@ -59,10 +59,12 @@ public class Caller {
                 System.exit(0);
             }
         }
-        s.close();
+        scanner.close();
+        return result;
     }
 
     private void generatePlayers() {
+        System.out.println("Generating players");
         for (int i = 1; i <= numOfPlayers; i++) {
             Player player = new Player(i, rowsOfTicket, numOfValuesPerRow, numberRange);
             playersInPlay.add(player);
@@ -71,18 +73,18 @@ public class Caller {
         }
     }
 
-
-    private void generateNumber() {
+    private int generateNumber() {
         int newGeneratedNumber = housieBoard.generateNewNumber();
         if (housieBoard.numbersMarkedTillNow == numberRange) {
             gameStatus = GameStatus.GAMEOVER;
         }
         System.out.println("The Number Picked is :" + newGeneratedNumber);
         System.out.println("Numbers of values called until now " + housieBoard.numbersMarkedTillNow);
-        markAllTicketsWithGeneratedNumber(newGeneratedNumber);
+        return newGeneratedNumber;
     }
 
-    private void markAllTicketsWithGeneratedNumber(int numberToMark) {
+    private String markAllTicketsWithGeneratedNumber(int numberToMark) {
+        StringBuilder completeWinnerList = new StringBuilder("");
         for (Ticket ticket : ticketsInPlay) {
             ticket.markNumberOnTicket(numberToMark);
             ticket.printTicket();
@@ -113,11 +115,14 @@ public class Caller {
             boolean result = addWinnerForFullHouse(winnersList, fullHouseWinningPlayers);
             if (result) {
                 winnersList.getWinnersList().entrySet().forEach(entry -> {
-                    System.out.println(entry.getKey() + " " + entry.getValue());
-                });
-                System.exit(0);
+                            completeWinnerList.append(entry.getKey() + " " + entry.getValue());
+                            completeWinnerList.append("\n");
+                        }
+
+                );
             }
         }
+        return completeWinnerList.toString();
     }
 
 

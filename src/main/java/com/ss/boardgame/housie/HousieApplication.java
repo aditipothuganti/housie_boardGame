@@ -6,9 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class HousieApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UserInputException {
         SpringApplication.run(HousieApplication.class, args);
-        Caller caller = new Caller();
-        caller.startPlaying();
+        UserInputs userInputs = new UserInputs(90, 10, 3, 10, 5);
+        Caller caller = new Caller(userInputs);
+        System.out.println(caller.startPlaying());
     }
 }
