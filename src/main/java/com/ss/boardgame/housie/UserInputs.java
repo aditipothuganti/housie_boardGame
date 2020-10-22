@@ -1,5 +1,7 @@
 package com.ss.boardgame.housie;
 
+import java.util.Scanner;
+
 public class UserInputs {
 
     private int numberRange;
@@ -8,6 +10,9 @@ public class UserInputs {
     private int columnsOfTicket;
     private int numOfValuesPerRow;
 
+    public UserInputs() {
+    }
+
     public UserInputs(int numberRange, int numOfPlayers, int rowsOfTicket, int columnsOfTicket, int numOfValuesPerRow) throws UserInputException {
         this.numberRange = numberRange;
         this.numOfPlayers = numOfPlayers;
@@ -15,6 +20,47 @@ public class UserInputs {
         this.columnsOfTicket = columnsOfTicket;
         this.numOfValuesPerRow = numOfValuesPerRow;
         checkValidity();
+    }
+
+    public UserInputs setUserInputsFromPrompt() throws UserInputException {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Enter the number range");
+        if (s.nextLine().isEmpty()) {
+            System.out.println("Nothing was entered. Defaulting number range to 90");
+            numberRange = 90;
+        } else {
+            numberRange = Integer.parseInt(s.nextLine());
+        }
+        System.out.println("Number of players");
+        if (s.nextLine().isEmpty()) {
+            System.out.println("Nothing was entered. Defaulting number of players to 5");
+            numOfPlayers = 5;
+        } else {
+            numOfPlayers = Integer.parseInt(s.nextLine());
+        }
+        System.out.println("Number of rows");
+        if (s.nextLine().isEmpty()) {
+            System.out.println("Nothing was entered. Defaulting number of rows to 3");
+            rowsOfTicket = 3;
+        } else {
+            rowsOfTicket = Integer.parseInt(s.nextLine());
+        }
+        System.out.println("Number of columns");
+        if (s.nextLine().isEmpty()) {
+            System.out.println("Nothing was entered. Defaulting number of columns to 10");
+            columnsOfTicket = 10;
+        } else {
+            columnsOfTicket = Integer.parseInt(s.nextLine());
+        }
+        System.out.println("Number of values per row");
+        if (s.nextLine().isEmpty()) {
+            System.out.println("Nothing was entered. Defaulting number of Values Per Row to 5");
+            numOfValuesPerRow = 5;
+        } else {
+            numOfValuesPerRow = Integer.parseInt(s.nextLine());
+        }
+        return new UserInputs(numberRange, numOfPlayers, rowsOfTicket, columnsOfTicket, numOfValuesPerRow);
+
     }
 
     public void checkValidity() throws UserInputException {
@@ -28,7 +74,6 @@ public class UserInputs {
             throw new UserInputException("Invalid inputs. NumberRange should be greater than (number of rows)X(number of Values Per Row)");
         }
     }
-
 
     public int getNumberRange() {
         return numberRange;

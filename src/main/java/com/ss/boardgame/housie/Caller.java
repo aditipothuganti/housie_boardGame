@@ -12,7 +12,7 @@ import static com.ss.boardgame.housie.winningCombinations.WinningCombinationsHel
 
 public class Caller {
 
-    private int numberRange, numOfPlayers, rowsOfTicket, columnsOfTicket, numOfValuesPerRow = 0;
+    private int numberRange, numOfPlayers, rowsOfTicket, columnsOfTicket, numOfValuesPerRow;
     private List<String> earlyFiveWinningPlayers = new ArrayList<>();
     private List<String> topLineWinningPlayers = new ArrayList<>();
     private List<String> fullHouseWinningPlayers = new ArrayList<>();
