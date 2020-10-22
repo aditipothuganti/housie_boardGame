@@ -2,6 +2,8 @@ package com.ss.boardgame.housie;
 
 import java.util.Scanner;
 
+import static com.ss.boardgame.housie.constants.HousieConstants.*;
+
 public class UserInputs {
 
     private int numberRange;
@@ -24,35 +26,35 @@ public class UserInputs {
 
     public UserInputs setUserInputsFromPrompt() throws UserInputException {
         Scanner s = new Scanner(System.in);
-        System.out.println("Enter the number range");
+        System.out.println(ENTER_RANGE);
         String numberRange = s.nextLine().trim();
         if (numberRange.isEmpty()) {
-            System.out.println("Nothing was entered. Defaulting number range to 90");
-            numberRange = "90";
+            System.out.println(ENTER_RANGE_DEFAULT_MSG);
+            numberRange = DEFAULT_RANGE;
         }
-        System.out.println("Number of players");
+        System.out.println(ENTER_PLAYERS);
         String numOfPlayers = s.nextLine().trim();
         if (numOfPlayers.isEmpty()) {
-            System.out.println("Nothing was entered. Defaulting number of players to 5");
-            numOfPlayers = "5";
+            System.out.println(ENTER_PLAYERS_DEFAULT_MSG);
+            numOfPlayers = DEFAULT_PLAYERS;
         }
-        System.out.println("Number of rows");
+        System.out.println(ENTER_ROWS);
         String rowsOfTicket = s.nextLine().trim();
         if (rowsOfTicket.isEmpty()) {
-            System.out.println("Nothing was entered. Defaulting number of rows to 3");
-            rowsOfTicket = "3";
+            System.out.println(ENTER_ROWS_DEFAULT_MSG);
+            rowsOfTicket = DEFAULT_ROWS;
         }
-        System.out.println("Number of columns");
+        System.out.println(ENTER_COLUMNS);
         String columnsOfTicket = s.nextLine().trim();
         if (columnsOfTicket.isEmpty()) {
-            System.out.println("Nothing was entered. Defaulting number of columns to 10");
-            columnsOfTicket = "10";
+            System.out.println(ENTER_COLUMNS_DEFAULT_MSG);
+            columnsOfTicket = DEFAULT_COLUMNS;
         }
-        System.out.println("Number of values per row");
+        System.out.println(ENTER_VALUES_PER_ROW);
         String numOfValuesPerRow = s.nextLine().trim();
         if (numOfValuesPerRow.isEmpty()) {
-            System.out.println("Nothing was entered. Defaulting number of Values Per Row to 5");
-            numOfValuesPerRow = "5";
+            System.out.println(ENTER_VALUES_FOR_ROW_DEFAULT_MSG);
+            numOfValuesPerRow = DEFAULT_VALUES_PER_ROW;
         }
         return new UserInputs(Integer.valueOf(numberRange), Integer.valueOf(numOfPlayers), Integer.valueOf(rowsOfTicket), Integer.valueOf(columnsOfTicket), Integer.valueOf(numOfValuesPerRow));
 
@@ -60,13 +62,13 @@ public class UserInputs {
 
     public void checkValidity() throws UserInputException {
         if (numOfPlayers <= 0 || rowsOfTicket <= 0 || numOfValuesPerRow <= 0 || numberRange <= 0 || columnsOfTicket <= 0) {
-            throw new UserInputException("Invalid inputs. All inputs must be greater than zero");
+            throw new UserInputException(INVALID_INPUT_GREATER_THAN_ZERO);
         }
         if (numOfValuesPerRow > columnsOfTicket) {
-            throw new UserInputException("Invalid inputs. Number of values per row should be less than number of columns");
+            throw new UserInputException(INVALID_INPUT_ROW_VALUES);
         }
         if (rowsOfTicket * numOfValuesPerRow > numberRange) {
-            throw new UserInputException("Invalid inputs. NumberRange should be greater than (number of rows)X(number of Values Per Row)");
+            throw new UserInputException(INVALID_INPUT_RANGE_CONDITION);
         }
     }
 

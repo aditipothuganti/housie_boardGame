@@ -11,6 +11,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.ss.boardgame.housie.constants.HousieConstants.*;
+
 public class WinningCombinationsHelper {
 
 
@@ -23,8 +25,8 @@ public class WinningCombinationsHelper {
         if (!CollectionUtils.isEmpty(winningPlayers))
             winnersList.addWinner(WinningCombinations.EARLY_FIVE, winningPlayers);
         if (winnersList.getWinnersList().containsKey(WinningCombinations.EARLY_FIVE)) {
-            System.out.println("WE have a winner for early five");
-            System.out.println("Winning Ticket:");
+            System.out.println(WINNER_EARLY_FIVE);
+            System.out.println(WINNING_TICKET);
             System.out.println(winnersList.getWinnersList().get(WinningCombinations.EARLY_FIVE).toString());
         }
     }
@@ -49,8 +51,8 @@ public class WinningCombinationsHelper {
             winnersList.addWinner(WinningCombinations.FIRST_ROW, winningPlayers);
         }
         if (winnersList.getWinnersList().containsKey(WinningCombinations.FIRST_ROW)) {
-            System.out.println("WE have a winner for Top Line");
-            System.out.println("Winning Ticket:");
+            System.out.println(WINNER_EARLY_TOP_ROW);
+            System.out.println(WINNING_TICKET);
             System.out.println(winnersList.getWinnersList().get(WinningCombinations.FIRST_ROW).toString());
         }
     }
@@ -60,8 +62,8 @@ public class WinningCombinationsHelper {
         if (!CollectionUtils.isEmpty(winningPlayers)) {
             winnersList.addWinner(WinningCombinations.FULL_HOUSE, winningPlayers);
             if (winnersList.getWinnersList().containsKey(WinningCombinations.FULL_HOUSE)) {
-                System.out.println("WE have a winner for Full House");
-                System.out.println("Winning Ticket:");
+                System.out.println(WINNER_EARLY_FULL_HOUSE);
+                System.out.println(WINNING_TICKET);
                 System.out.println(winnersList.getWinnersList().get(WinningCombinations.FULL_HOUSE).toString());
                 return true;
             }

@@ -42,7 +42,7 @@ public class Caller {
         playersInPlay = generatePlayers(rowsOfTicket, numOfValuesPerRow, numberRange, numOfPlayers);
         ticketsInPlay = generateTicket(playersInPlay);
         while (housieBoard.numbersMarkedTillNow <= housieBoard.totalNumbersInHousieBoard && gameStatus == GameStatus.INPROGRESS && result.isEmpty()) {
-            System.out.println("Enter N to generate Number");
+            System.out.println("Enter N to generate Number or Enter P to Print Current Status of All Tickets");
             char enterCharacter = scanner.next().charAt(0);
             if (enterCharacter == 'N' || enterCharacter == 'n') {
                 int generatedNumber = generateNumber();
