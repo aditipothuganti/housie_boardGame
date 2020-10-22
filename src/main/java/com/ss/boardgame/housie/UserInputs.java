@@ -25,41 +25,36 @@ public class UserInputs {
     public UserInputs setUserInputsFromPrompt() throws UserInputException {
         Scanner s = new Scanner(System.in);
         System.out.println("Enter the number range");
-        if (s.nextLine().isEmpty()) {
+        String numberRange = s.nextLine().trim();
+        if (numberRange.isEmpty()) {
             System.out.println("Nothing was entered. Defaulting number range to 90");
-            numberRange = 90;
-        } else {
-            numberRange = Integer.parseInt(s.nextLine());
+            numberRange = "90";
         }
         System.out.println("Number of players");
-        if (s.nextLine().isEmpty()) {
+        String numOfPlayers = s.nextLine().trim();
+        if (numOfPlayers.isEmpty()) {
             System.out.println("Nothing was entered. Defaulting number of players to 5");
-            numOfPlayers = 5;
-        } else {
-            numOfPlayers = Integer.parseInt(s.nextLine());
+            numOfPlayers = "5";
         }
         System.out.println("Number of rows");
-        if (s.nextLine().isEmpty()) {
+        String rowsOfTicket = s.nextLine().trim();
+        if (rowsOfTicket.isEmpty()) {
             System.out.println("Nothing was entered. Defaulting number of rows to 3");
-            rowsOfTicket = 3;
-        } else {
-            rowsOfTicket = Integer.parseInt(s.nextLine());
+            rowsOfTicket = "3";
         }
         System.out.println("Number of columns");
-        if (s.nextLine().isEmpty()) {
+        String columnsOfTicket = s.nextLine().trim();
+        if (columnsOfTicket.isEmpty()) {
             System.out.println("Nothing was entered. Defaulting number of columns to 10");
-            columnsOfTicket = 10;
-        } else {
-            columnsOfTicket = Integer.parseInt(s.nextLine());
+            columnsOfTicket = "10";
         }
         System.out.println("Number of values per row");
-        if (s.nextLine().isEmpty()) {
+        String numOfValuesPerRow = s.nextLine().trim();
+        if (numOfValuesPerRow.isEmpty()) {
             System.out.println("Nothing was entered. Defaulting number of Values Per Row to 5");
-            numOfValuesPerRow = 5;
-        } else {
-            numOfValuesPerRow = Integer.parseInt(s.nextLine());
+            numOfValuesPerRow = "5";
         }
-        return new UserInputs(numberRange, numOfPlayers, rowsOfTicket, columnsOfTicket, numOfValuesPerRow);
+        return new UserInputs(Integer.valueOf(numberRange), Integer.valueOf(numOfPlayers), Integer.valueOf(rowsOfTicket), Integer.valueOf(columnsOfTicket), Integer.valueOf(numOfValuesPerRow));
 
     }
 

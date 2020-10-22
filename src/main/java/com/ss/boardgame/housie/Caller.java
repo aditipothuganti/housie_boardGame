@@ -78,7 +78,6 @@ public class Caller {
         StringBuilder completeWinnerList = new StringBuilder();
         for (Ticket ticket : ticketsInPlay) {
             ticket.markNumberOnTicket(numberToMark);
-            //ticket.printTicket();
             if (housieBoard.numbersMarkedTillNow >= 5 && !winnersList.getWinnersList().containsKey(WinningCombinations.EARLY_FIVE)) {
                 if (checkForEarlyFive(ticket)) {
                     earlyFiveWinningPlayers.add(ticket.getPlayerName());
