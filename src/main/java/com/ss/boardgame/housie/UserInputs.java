@@ -60,6 +60,11 @@ public class UserInputs {
 
     }
 
+    /**
+     * Validates if the input entered by the user is valid and not negative.
+     *
+     * @throws UserInputException
+     */
     public void checkValidity() throws UserInputException {
         try {
             if (numOfPlayers <= 0 || rowsOfTicket <= 0 || numOfValuesPerRow <= 0 || numberRange <= 0 || columnsOfTicket <= 0) {

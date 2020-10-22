@@ -14,6 +14,9 @@ public class HousieBoard {
         generateBoardNumbers();
     }
 
+    /**
+     * Generates the housie board numbers for the specified range.
+     */
     private void generateBoardNumbers() {
         for (int i = 1; i <= totalNumbersInHousieBoard; i++) {
             boardNumbers.add(i);

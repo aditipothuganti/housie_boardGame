@@ -9,7 +9,12 @@ public class GenerateGameHelper {
 
     private final static SecureRandom random = new SecureRandom();
 
-
+    /**
+     * Generates a random unique value from the available numbers in the housie board.
+     *
+     * @param housieBoard has all the numbers from 1 to range of values.
+     * @return unique number within the range of values user specified.
+     */
     public static int generateNewNumber(HousieBoard housieBoard) {
         Random randomizer = new Random();
         int generatedNumber = housieBoard.boardNumbers.get(randomizer.nextInt(housieBoard.boardNumbers.size()));
@@ -19,6 +24,16 @@ public class GenerateGameHelper {
 
     }
 
+    /**
+     * Generates a tickets with @param{rowsOfTicket} as rows and @param{numOfValuesPerRow} as columns
+     * within a range of @param{numberRange}.
+     * All the numbers in the ticket as unique.
+     *
+     * @param rowsOfTicket number of rows in a ticket
+     * @param numOfValuesPerRow number of columns in a ticket
+     * @param numberRange range for the values in a ticket.
+     * @return Ticket with unique ticket numbers.
+     */
     public static List<List<TicketNumber>> generateTicketData(int rowsOfTicket, int numOfValuesPerRow, int numberRange) {
         int totalNumbers = rowsOfTicket * numOfValuesPerRow;
         Set<Integer> ticketNumbersSet = new HashSet<>();
@@ -40,6 +55,16 @@ public class GenerateGameHelper {
         return ticketData;
     }
 
+    /**
+     * Generate all the players in game specified by the user or defaulted to 5 other wise.
+     * Associate a single ticket for a player.
+     *
+     * @param rowsOfTicket
+     * @param numOfValuesPerRow
+     * @param numberRange
+     * @param numOfPlayers
+     * @return list of the players in the game.
+     */
     public static List<Player> generatePlayers(int rowsOfTicket, int numOfValuesPerRow, int numberRange, int numOfPlayers) {
         System.out.println("Generating players");
         List<Player> playersInPlay = new ArrayList<>();

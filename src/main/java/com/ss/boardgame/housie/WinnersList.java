@@ -14,10 +14,16 @@ public class WinnersList {
         this.setWinnersList(new LinkedHashMap<>());
     }
 
+    /**
+     * @return list of winners for the game
+     */
     public Map<WinningCombinations, List<String>> getWinnersList() {
         return winnersList;
     }
 
+    /**
+     * @param winnersList key : value pair for Winner Combination and the list of winners.
+     */
     public void setWinnersList(Map<WinningCombinations, List<String>> winnersList) {
         this.winnersList = winnersList;
     }

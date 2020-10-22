@@ -15,11 +15,20 @@ import static com.ss.boardgame.housie.constants.HousieConstants.*;
 
 public class WinningCombinationsHelper {
 
-
+    /**
+     *  Condition to check if a tickets has won the early 5.
+     * @param ticket has a List of List of ticket numbers
+     * @return true if condition met, false if not met.
+     */
     public static boolean checkForEarlyFive(Ticket ticket) {
         return ticket.getNumberOfValuesTickedOff() == 5;
     }
 
+    /**
+     * Add early 5 winner if combination not claimed.
+     * @param winnersList
+     * @param winningPlayers List of winners(players) for the combination.
+     */
     public static void addWinnerForEarlyFive(WinnersList winnersList, List<String> winningPlayers) {
 
         if (!CollectionUtils.isEmpty(winningPlayers))
@@ -31,11 +40,22 @@ public class WinningCombinationsHelper {
         }
     }
 
+    /**
+     * Check if the top line has been completed.
+     * @param ticket has a List of List of ticket numbers
+     * @return true if condition met, else false.
+     */
     public static boolean checkForTopLine(Ticket ticket) {
         List<TicketNumber> firstRow = ticket.getTicketData().get(0);
         return firstRow.stream().allMatch(TicketNumber::getIsCalled);
     }
 
+    /**
+     * Check if entire ticket has been marked with all the called numbers.
+     * @param ticket has a List of List of ticket numbers
+     * @param rowsOfTicket number of rows for each ticket.
+     * @return true if condition met, else return false.
+     */
     public static boolean checkForFullHouse(Ticket ticket, int rowsOfTicket) {
         Boolean[] rowArray = new Boolean[rowsOfTicket];
         for (int i = 0; i < rowsOfTicket; i++) {
@@ -45,6 +65,11 @@ public class WinningCombinationsHelper {
         return Arrays.stream(rowArray).allMatch(Boolean.TRUE::equals);
     }
 
+    /**
+     * Add top line winner if combination not claimed.
+     * @param winnersList
+     * @param winningPlayers List of winners(players) for the combination.
+     */
     public static void addWinnerForTopLine(WinnersList winnersList, List<String> winningPlayers) {
 
         if (!CollectionUtils.isEmpty(winningPlayers)) {
@@ -56,7 +81,12 @@ public class WinningCombinationsHelper {
             System.out.println(winnersList.getWinnersList().get(WinningCombinations.FIRST_ROW).toString());
         }
     }
-
+    /**
+     * Add full house  winner if combination not claimed.
+     * @param winnersList
+     * @param winningPlayers List of winners(players) for the combination.
+     * @return return true to check winner, and stop game, else continue playing.
+     */
     public static boolean addWinnerForFullHouse(WinnersList winnersList, List<String> winningPlayers) {
 
         if (!CollectionUtils.isEmpty(winningPlayers)) {
@@ -71,7 +101,14 @@ public class WinningCombinationsHelper {
         return false;
     }
 
-
+    /**
+     * Get the summary of all players after the game is done.
+     * @param playersInPlay number of players.
+     * @param earlyFiveWinningPlayers   winners for Early 5 combination.
+     * @param topLineWinningPlayers winners for topline combination.
+     * @param fullHouseWinningPlayers winners for full house combination.
+     * @return String of game summary.
+     */
     public static String getAllPlayersStatus(List<Player> playersInPlay, List<String> earlyFiveWinningPlayers, List<String> topLineWinningPlayers, List<String> fullHouseWinningPlayers) {
         Map<String, String> endGameStatus = new LinkedHashMap<>();
         StringBuilder completePlayerStatusList = new StringBuilder();

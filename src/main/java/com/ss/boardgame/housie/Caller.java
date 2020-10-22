@@ -64,6 +64,12 @@ public class Caller {
         return result;
     }
 
+
+    /**
+     * Returns a new integer generated from the range of values in a random manner with
+     * out any duplicates.
+     * @return  the new number to be called by the housie board
+     */
     private int generateNumber() {
         int newGeneratedNumber = generateNewNumber(housieBoard);
         if (housieBoard.numbersMarkedTillNow == numberRange) {
@@ -74,6 +80,14 @@ public class Caller {
         return newGeneratedNumber;
     }
 
+
+    /**
+     * Marks the called value in the tickets playing the game where the number exists.
+     * Also checks if there is a winner for the ticket after marking the number.
+     *
+     * @param numberToMark the number that has been called should be marked as called in all tickets.
+     * @return the winners list
+     */
     private String markAllTicketsWithGeneratedNumber(int numberToMark) {
         StringBuilder completeWinnerList = new StringBuilder();
         for (Ticket ticket : ticketsInPlay) {
