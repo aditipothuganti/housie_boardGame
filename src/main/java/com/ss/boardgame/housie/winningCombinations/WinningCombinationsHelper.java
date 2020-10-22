@@ -2,6 +2,7 @@ package com.ss.boardgame.housie.winningCombinations;
 
 import com.ss.boardgame.housie.Ticket;
 import com.ss.boardgame.housie.TicketNumber;
+import com.ss.boardgame.housie.WinnersList;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Arrays;
