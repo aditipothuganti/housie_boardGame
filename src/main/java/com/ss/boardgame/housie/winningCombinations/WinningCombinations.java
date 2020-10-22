@@ -1,4 +1,4 @@
-package com.ss.boardgame.housie;
+package com.ss.boardgame.housie.winningCombinations;
 
 public enum WinningCombinations {
  EARLY_FIVE,

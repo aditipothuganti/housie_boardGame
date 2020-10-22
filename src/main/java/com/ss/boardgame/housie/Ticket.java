@@ -1,6 +1,10 @@
 package com.ss.boardgame.housie;
 
-import java.util.*;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Ticket {
@@ -10,7 +14,7 @@ public class Ticket {
     private int columns;
     private int numberOfValuesTickedOff;
     private List<List<TicketNumber>> ticketData;
-    Random random = new Random();
+    SecureRandom random = new SecureRandom();
     private String playerName;
 
     public List<List<TicketNumber>> getTicketData() {

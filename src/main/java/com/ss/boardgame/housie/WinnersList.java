@@ -1,5 +1,7 @@
 package com.ss.boardgame.housie;
 
+import com.ss.boardgame.housie.winningCombinations.WinningCombinations;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +10,7 @@ public class WinnersList {
 
     private Map<WinningCombinations, List<String>> winnersList;
 
-    WinnersList() {
+    public WinnersList() {
         this.setWinnersList(new LinkedHashMap<>());
     }
 

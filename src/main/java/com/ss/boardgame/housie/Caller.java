@@ -1,12 +1,15 @@
 package com.ss.boardgame.housie;
 
+import com.ss.boardgame.housie.winningCombinations.WinningCombinations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+
+import static com.ss.boardgame.housie.GenerateGameHelper.generatePlayers;
+import static com.ss.boardgame.housie.GenerateGameHelper.generateTicket;
+import static com.ss.boardgame.housie.winningCombinations.WinningCombinationsHelper.*;
 
 public class Caller {
 
@@ -34,13 +37,12 @@ public class Caller {
 
     public String startPlaying() {
         housieBoard = new HousieBoard(numberRange);
-        ticketsInPlay = new ArrayList<>();
-        playersInPlay = new ArrayList<>();
         gameStatus = GameStatus.INPROGRESS;
         winnersList = new WinnersList();
         Scanner scanner = new Scanner(System.in);
         String result = "";
-        generatePlayers();
+        playersInPlay = generatePlayers(numOfPlayers, rowsOfTicket, numOfValuesPerRow, numberRange);
+        ticketsInPlay = generateTicket(playersInPlay);
         while (housieBoard.numbersMarkedTillNow <= housieBoard.totalNumbersInHousieBoard && gameStatus == GameStatus.INPROGRESS && result.isEmpty()) {
             System.out.println("Enter N to generate Number");
             char enterCharacter = scanner.next().charAt(0);
@@ -61,16 +63,6 @@ public class Caller {
         }
         scanner.close();
         return result;
-    }
-
-    private void generatePlayers() {
-        System.out.println("Generating players");
-        for (int i = 1; i <= numOfPlayers; i++) {
-            Player player = new Player(i, rowsOfTicket, numOfValuesPerRow, numberRange);
-            playersInPlay.add(player);
-            player.getTicket().printTicket();
-            ticketsInPlay.add(player.getTicket());
-        }
     }
 
     private int generateNumber() {
@@ -100,7 +92,7 @@ public class Caller {
             }
             if (housieBoard.numbersMarkedTillNow >= (numOfValuesPerRow * rowsOfTicket) && !winnersList.getWinnersList().containsKey(WinningCombinations.FULL_HOUSE)) {
                 System.out.println("Checking for full house");
-                if (checkForFullHouse(ticket)) {
+                if (checkForFullHouse(ticket, rowsOfTicket)) {
                     fullHouseWinningPlayers.add(ticket.getPlayerName());
                 }
             }
@@ -126,58 +118,4 @@ public class Caller {
     }
 
 
-    private static boolean checkForEarlyFive(Ticket ticket) {
-        return ticket.getNumberOfValuesTickedOff() == 5;
-    }
-
-    private static void addWinnerForEarlyFive(WinnersList winnersList, List<String> winningPlayers) {
-
-        if (!CollectionUtils.isEmpty(winningPlayers))
-            winnersList.addWinner(WinningCombinations.EARLY_FIVE, winningPlayers);
-        if (winnersList.getWinnersList().containsKey(WinningCombinations.EARLY_FIVE)) {
-            System.out.println("WE have a winner for early five");
-            System.out.println("Winning Ticket:");
-            System.out.println(winnersList.getWinnersList().get(WinningCombinations.EARLY_FIVE).toString());
-        }
-    }
-
-    private static boolean checkForTopLine(Ticket ticket) {
-        List<TicketNumber> firstRow = ticket.getTicketData().get(0);
-        return firstRow.stream().allMatch(ticketNumber -> ticketNumber.getIsCalled());
-    }
-
-    private boolean checkForFullHouse(Ticket ticket) {
-        Boolean[] rowArray = new Boolean[rowsOfTicket];
-        for (int i = 0; i < rowsOfTicket; i++) {
-            List<TicketNumber> row = ticket.getTicketData().get(i);
-            rowArray[i] = row.stream().allMatch(ticketNumber -> ticketNumber.getIsCalled());
-        }
-        return Arrays.asList(rowArray).stream().allMatch(val -> Boolean.TRUE.equals(val));
-    }
-
-    private static void addWinnerForTopLine(WinnersList winnersList, List<String> winningPlayers) {
-
-        if (!CollectionUtils.isEmpty(winningPlayers)) {
-            winnersList.addWinner(WinningCombinations.FIRST_ROW, winningPlayers);
-        }
-        if (winnersList.getWinnersList().containsKey(WinningCombinations.FIRST_ROW)) {
-            System.out.println("WE have a winner for Top Line");
-            System.out.println("Winning Ticket:");
-            System.out.println(winnersList.getWinnersList().get(WinningCombinations.FIRST_ROW).toString());
-        }
-    }
-
-    private static boolean addWinnerForFullHouse(WinnersList winnersList, List<String> winningPlayers) {
-
-        if (!CollectionUtils.isEmpty(winningPlayers)) {
-            winnersList.addWinner(WinningCombinations.FULL_HOUSE, winningPlayers);
-            if (winnersList.getWinnersList().containsKey(WinningCombinations.FULL_HOUSE)) {
-                System.out.println("WE have a winner for Full House");
-                System.out.println("Winning Ticket:");
-                System.out.println(winnersList.getWinnersList().get(WinningCombinations.FULL_HOUSE).toString());
-                return true;
-            }
-        }
-        return false;
-    }
 }

@@ -18,8 +18,14 @@ public class UserInputs {
     }
 
     public void checkValidity() throws UserInputException {
-        if ((rowsOfTicket * numOfValuesPerRow) > numberRange || numOfValuesPerRow > columnsOfTicket) {
-            throw new UserInputException("Invalid inputs");
+        if(numOfPlayers<=0||rowsOfTicket<=0||numOfValuesPerRow<=0||numberRange<=0||columnsOfTicket<=0){
+            throw new UserInputException("Invalid inputs. All inputs must be greater than zero");
+        }
+        if (numOfValuesPerRow > columnsOfTicket) {
+            throw new UserInputException("Invalid inputs. Number of values per row should be less than number of columns");
+        }
+        if(rowsOfTicket * numOfValuesPerRow > numberRange){
+            throw new UserInputException("Invalid inputs. NumberRange should be greater than (number of rows)X(number of Values Per Row)");
         }
     }
 

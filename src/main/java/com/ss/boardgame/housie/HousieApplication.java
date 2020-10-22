@@ -8,7 +8,7 @@ public class HousieApplication {
 
     public static void main(String[] args) throws UserInputException {
         SpringApplication.run(HousieApplication.class, args);
-        UserInputs userInputs = new UserInputs(90, 10, 3, 10, 5);
+        UserInputs userInputs = new UserInputs(10, 3, 2, 5, 4);
         Caller caller = new Caller(userInputs);
         System.out.println(caller.startPlaying());
     }
