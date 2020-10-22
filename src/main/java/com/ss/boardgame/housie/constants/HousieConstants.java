@@ -23,6 +23,8 @@ public class HousieConstants {
     public static final String INVALID_INPUT_ROW_VALUES = "Invalid inputs. Number of values per row should be less than number of columns";
     public static final String INVALID_INPUT_RANGE_CONDITION = "Invalid inputs. NumberRange should be greater than (number of rows)X(number of Values Per Row)";
 
+    public static final String INVALID_INPUT_REPROMPT = "Please enter all values again";
+
     public static final String WINNING_TICKET = "Winning Ticket:";
     public static final String WINNER_EARLY_FIVE = "We have a winner for early five";
     public static final String WINNER_EARLY_TOP_ROW = "We have a winner for top row";
