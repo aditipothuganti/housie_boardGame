@@ -1,12 +1,15 @@
 package com.ss.boardgame.housie.winningCombinations;
 
+import com.ss.boardgame.housie.Player;
 import com.ss.boardgame.housie.Ticket;
 import com.ss.boardgame.housie.TicketNumber;
 import com.ss.boardgame.housie.WinnersList;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WinningCombinationsHelper {
 
@@ -28,16 +31,16 @@ public class WinningCombinationsHelper {
 
     public static boolean checkForTopLine(Ticket ticket) {
         List<TicketNumber> firstRow = ticket.getTicketData().get(0);
-        return firstRow.stream().allMatch(ticketNumber -> ticketNumber.getIsCalled());
+        return firstRow.stream().allMatch(TicketNumber::getIsCalled);
     }
 
     public static boolean checkForFullHouse(Ticket ticket, int rowsOfTicket) {
         Boolean[] rowArray = new Boolean[rowsOfTicket];
         for (int i = 0; i < rowsOfTicket; i++) {
             List<TicketNumber> row = ticket.getTicketData().get(i);
-            rowArray[i] = row.stream().allMatch(ticketNumber -> ticketNumber.getIsCalled());
+            rowArray[i] = row.stream().allMatch(TicketNumber::getIsCalled);
         }
-        return Arrays.asList(rowArray).stream().allMatch(val -> Boolean.TRUE.equals(val));
+        return Arrays.stream(rowArray).allMatch(Boolean.TRUE::equals);
     }
 
     public static void addWinnerForTopLine(WinnersList winnersList, List<String> winningPlayers) {
@@ -64,5 +67,42 @@ public class WinningCombinationsHelper {
             }
         }
         return false;
+    }
+
+
+    public static String getAllPlayersStatus(List<Player> playersInPlay, List<String> earlyFiveWinningPlayers, List<String> topLineWinningPlayers, List<String> fullHouseWinningPlayers) {
+        Map<String, String> endGameStatus = new LinkedHashMap<>();
+        StringBuilder completePlayerStatusList = new StringBuilder();
+        playersInPlay.forEach(player -> {
+            if (earlyFiveWinningPlayers.contains(player.getPlayerName())) {
+                if (endGameStatus.containsKey(player.getPlayerName())) {
+                    endGameStatus.put(player.getPlayerName(), endGameStatus.get(player.getPlayerName()) + " and " + WinningCombinations.EARLY_FIVE.toString());
+                } else {
+                    endGameStatus.put(player.getPlayerName(), WinningCombinations.EARLY_FIVE.toString());
+                }
+            }
+            if (topLineWinningPlayers.contains(player.getPlayerName())) {
+                if (endGameStatus.containsKey(player.getPlayerName())) {
+                    endGameStatus.put(player.getPlayerName(), endGameStatus.get(player.getPlayerName()) + " and " + WinningCombinations.FIRST_ROW.toString());
+                } else {
+                    endGameStatus.put(player.getPlayerName(), WinningCombinations.FIRST_ROW.toString());
+                }
+            }
+            if (fullHouseWinningPlayers.contains(player.getPlayerName())) {
+                if (endGameStatus.containsKey(player.getPlayerName())) {
+                    endGameStatus.put(player.getPlayerName(), endGameStatus.get(player.getPlayerName()) + " and " + WinningCombinations.FULL_HOUSE.toString());
+                } else {
+                    endGameStatus.put(player.getPlayerName(), WinningCombinations.FULL_HOUSE.toString());
+                }
+            }
+            if (!earlyFiveWinningPlayers.contains(player.getPlayerName()) && !topLineWinningPlayers.contains(player.getPlayerName()) && !fullHouseWinningPlayers.contains(player.getPlayerName())) {
+                endGameStatus.put(player.getPlayerName(), WinningCombinations.NOTHING.toString());
+            }
+        });
+        endGameStatus.forEach((key, value) -> {
+            completePlayerStatusList.append(key).append(" : ").append(value);
+            completePlayerStatusList.append("\n");
+        });
+        return completePlayerStatusList.toString();
     }
 }

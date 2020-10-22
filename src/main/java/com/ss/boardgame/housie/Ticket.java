@@ -1,32 +1,23 @@
 package com.ss.boardgame.housie;
 
-import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Ticket {
 
-    private int ticketId;
     private int rows;
     private int columns;
     private int numberOfValuesTickedOff;
     private List<List<TicketNumber>> ticketData;
-    SecureRandom random = new SecureRandom();
     private String playerName;
+    private int numberRange;
 
-    public List<List<TicketNumber>> getTicketData() {
-        return ticketData;
-    }
-
-    public int getTicketId() {
-        return ticketId;
-    }
-
-    public void setTicketId(int ticketId) {
-        this.ticketId = ticketId;
+    Ticket(int rows, int columns, int numberRange, List<List<TicketNumber>> ticketData) {
+        this.rows = rows;
+        this.columns = columns;
+        this.ticketData = ticketData;
+        this.numberRange = numberRange;
+        // generateTicketNumbers(rows, columns, numberRange);
     }
 
     public int getRows() {
@@ -57,15 +48,27 @@ public class Ticket {
         this.playerName = playerName;
     }
 
-    Ticket(int rows, int columns, int numberRange, String player) {
-        this.rows = rows;
-        this.columns = columns;
-        this.ticketId = random.nextInt();
-        this.playerName = player;
-        generateTicketNumbers(rows, columns, numberRange);
+    public List<List<TicketNumber>> getTicketData() {
+        return ticketData;
     }
 
-    private void generateTicketNumbers(int rows, int columns, int numberRange) {
+    public List<List<TicketNumber>> setTicketData(List<List<TicketNumber>> ticketData) {
+        return ticketData;
+    }
+
+    public void setNumberOfValuesTickedOff(int numberOfValuesTickedOff) {
+        this.numberOfValuesTickedOff = numberOfValuesTickedOff;
+    }
+
+    public int getNumberRange() {
+        return numberRange;
+    }
+
+    public void setNumberRange(int numberRange) {
+        this.numberRange = numberRange;
+    }
+
+    /*    private void generateTicketNumbers(int rows, int columns, int numberRange) {
         int totalNumbers = rows * columns;
         Set<Integer> ticketNumbersSet = new HashSet<>();
         ticketData = new ArrayList<>();
@@ -84,18 +87,19 @@ public class Ticket {
                 ticketData.get(i).add(ticketNumber);
             }
         }
-    }
+    }*/
 
     public void printTicket() {
         System.out.println("PRINTING TICKET");
-        String result = "";
+        System.out.println(this.playerName);
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                result += ticketData.get(i).get(j).getNumber() + "-" + ticketData.get(i).get(j).getIsCalled() + "   ";
+                result.append(ticketData.get(i).get(j).getNumber()).append("-").append(ticketData.get(i).get(j).getIsCalled()).append("   ");
             }
             System.out.println(result);
             System.out.println();
-            result = "";
+            result = new StringBuilder();
             System.out.println();
         }
     }

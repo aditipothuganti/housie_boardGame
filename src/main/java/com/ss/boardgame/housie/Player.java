@@ -4,12 +4,6 @@ public class Player {
 
 	private Ticket ticket;
 	private String playerName;
-
-	
-	Player(int playerNumber, int rows, int columns, int numberRange) {
-		this.playerName =  "Player"+ playerNumber;
-		this.ticket = new Ticket(rows, columns, numberRange, playerName);
-	}
 	
 	public Ticket getTicket() {
 		return this.ticket;
@@ -18,5 +12,14 @@ public class Player {
 	public String getPlayerName() {
 		return this.playerName;
 	}
-	
+
+	public void setTicket(Ticket ticket) {
+		this.ticket = ticket;
+	}
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+
+
 } 
