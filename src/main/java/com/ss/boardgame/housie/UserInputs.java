@@ -74,40 +74,20 @@ public class UserInputs {
         return numberRange;
     }
 
-    public void setNumberRange(int numberRange) {
-        this.numberRange = numberRange;
-    }
-
     public int getNumOfPlayers() {
         return numOfPlayers;
-    }
-
-    public void setNumOfPlayers(int numOfPlayers) {
-        this.numOfPlayers = numOfPlayers;
     }
 
     public int getRowsOfTicket() {
         return rowsOfTicket;
     }
 
-    public void setRowsOfTicket(int rowsOfTicket) {
-        this.rowsOfTicket = rowsOfTicket;
-    }
-
     public int getColumnsOfTicket() {
         return columnsOfTicket;
     }
 
-    public void setColumnsOfTicket(int columnsOfTicket) {
-        this.columnsOfTicket = columnsOfTicket;
-    }
-
     public int getNumOfValuesPerRow() {
         return numOfValuesPerRow;
-    }
-
-    public void setNumOfValuesPerRow(int numOfValuesPerRow) {
-        this.numOfValuesPerRow = numOfValuesPerRow;
     }
 
 }
