@@ -1,5 +1,6 @@
 package com.ss.boardgame.housie;
 
+import com.ss.boardgame.housie.constants.GameStatus;
 import com.ss.boardgame.housie.winningCombinations.WinningCombinations;
 
 import java.util.ArrayList;
@@ -18,14 +19,11 @@ public class Caller {
     private List<String> fullHouseWinningPlayers = new ArrayList<>();
     private Set<Ticket> ticketsInPlay;
     private HousieBoard housieBoard;
-    private List<Player> playersInPlay;
     private GameStatus gameStatus;
     private WinnersList winnersList;
 
-    private final UserInputs userInputs;
 
     public Caller(UserInputs userInputs) {
-        this.userInputs = userInputs;
         this.numberRange = userInputs.getNumberRange();
         this.numOfPlayers = userInputs.getNumOfPlayers();
         this.rowsOfTicket = userInputs.getRowsOfTicket();
@@ -39,9 +37,9 @@ public class Caller {
         winnersList = new WinnersList();
         Scanner scanner = new Scanner(System.in);
         String result = "";
-        playersInPlay = generatePlayers(rowsOfTicket, numOfValuesPerRow, numberRange, numOfPlayers);
+        List<Player> playersInPlay = generatePlayers(rowsOfTicket, numOfValuesPerRow, numberRange, numOfPlayers);
         ticketsInPlay = generateTicket(playersInPlay);
-        while (housieBoard.numbersMarkedTillNow <= housieBoard.totalNumbersInHousieBoard && gameStatus == GameStatus.INPROGRESS && result.isEmpty()) {
+        while (housieBoard.getNumbersMarkedTillNow() <= housieBoard.getTotalNumbersInHousieBoard() && gameStatus == GameStatus.INPROGRESS && result.isEmpty()) {
             System.out.println("Enter N to generate Number or Enter P to Print Current Status of All Tickets");
             char enterCharacter = scanner.next().charAt(0);
             if (enterCharacter == 'N' || enterCharacter == 'n') {
@@ -72,11 +70,11 @@ public class Caller {
      */
     private int generateNumber() {
         int newGeneratedNumber = generateNewNumber(housieBoard);
-        if (housieBoard.numbersMarkedTillNow == numberRange) {
+        if (housieBoard.getNumbersMarkedTillNow() == numberRange) {
             gameStatus = GameStatus.GAMEOVER;
         }
         System.out.println("The Number Picked is :" + newGeneratedNumber);
-        System.out.println("Numbers of values called until now: " + housieBoard.numbersMarkedTillNow);
+        System.out.println("Numbers of values called until now: " + housieBoard.getNumbersMarkedTillNow());
         return newGeneratedNumber;
     }
 
@@ -92,17 +90,17 @@ public class Caller {
         StringBuilder completeWinnerList = new StringBuilder();
         for (Ticket ticket : ticketsInPlay) {
             ticket.markNumberOnTicket(numberToMark);
-            if (housieBoard.numbersMarkedTillNow >= 5 && !winnersList.getWinnersList().containsKey(WinningCombinations.EARLY_FIVE)) {
+            if (housieBoard.getNumbersMarkedTillNow() >= 5 && !winnersList.getWinnersList().containsKey(WinningCombinations.EARLY_FIVE)) {
                 if (checkForEarlyFive(ticket)) {
                     earlyFiveWinningPlayers.add(ticket.getPlayerName());
                 }
             }
-            if (housieBoard.numbersMarkedTillNow >= numOfValuesPerRow && !winnersList.getWinnersList().containsKey(WinningCombinations.FIRST_ROW)) {
+            if (housieBoard.getNumbersMarkedTillNow() >= numOfValuesPerRow && !winnersList.getWinnersList().containsKey(WinningCombinations.FIRST_ROW)) {
                 if (checkForTopLine(ticket)) {
                     topLineWinningPlayers.add(ticket.getPlayerName());
                 }
             }
-            if (housieBoard.numbersMarkedTillNow >= (numOfValuesPerRow * rowsOfTicket) && !winnersList.getWinnersList().containsKey(WinningCombinations.FULL_HOUSE)) {
+            if (housieBoard.getNumbersMarkedTillNow() >= (numOfValuesPerRow * rowsOfTicket) && !winnersList.getWinnersList().containsKey(WinningCombinations.FULL_HOUSE)) {
                 if (checkForFullHouse(ticket, rowsOfTicket)) {
                     fullHouseWinningPlayers.add(ticket.getPlayerName());
                 }
