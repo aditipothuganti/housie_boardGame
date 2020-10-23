@@ -17,9 +17,9 @@ public class GenerateGameHelper {
      */
     public static int generateNewNumber(HousieBoard housieBoard) {
         Random randomizer = new Random();
-        int generatedNumber = housieBoard.boardNumbers.get(randomizer.nextInt(housieBoard.boardNumbers.size()));
-        housieBoard.boardNumbers.remove(Integer.valueOf(generatedNumber));
-        housieBoard.numbersMarkedTillNow++;
+        int generatedNumber = housieBoard.getBoardNumbers().get(randomizer.nextInt(housieBoard.getBoardNumbers().size()));
+        housieBoard.getBoardNumbers().remove(Integer.valueOf(generatedNumber));
+        housieBoard.setNumbersMarkedTillNow(housieBoard.getNumbersMarkedTillNow() + 1);
         return generatedNumber;
 
     }
@@ -59,10 +59,10 @@ public class GenerateGameHelper {
      * Generate all the players in game specified by the user or defaulted to 5 other wise.
      * Associate a single ticket for a player.
      *
-     * @param rowsOfTicket
-     * @param numOfValuesPerRow
-     * @param numberRange
-     * @param numOfPlayers
+     * @param rowsOfTicket number of rows for the ticket
+     * @param numOfValuesPerRow values for each row
+     * @param numberRange the ticket number range
+     * @param numOfPlayers number of  players in the game
      * @return list of the players in the game.
      */
     public static List<Player> generatePlayers(int rowsOfTicket, int numOfValuesPerRow, int numberRange, int numOfPlayers) {

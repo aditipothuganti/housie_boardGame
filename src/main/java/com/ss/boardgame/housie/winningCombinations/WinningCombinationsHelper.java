@@ -26,7 +26,7 @@ public class WinningCombinationsHelper {
 
     /**
      * Add early 5 winner if combination not claimed.
-     * @param winnersList
+     * @param winnersList is key value pair of winning combination and winning player.
      * @param winningPlayers List of winners(players) for the combination.
      */
     public static void addWinnerForEarlyFive(WinnersList winnersList, List<String> winningPlayers) {
@@ -67,7 +67,7 @@ public class WinningCombinationsHelper {
 
     /**
      * Add top line winner if combination not claimed.
-     * @param winnersList
+     * @param winnersList is key value pair of winning combination and winning player.
      * @param winningPlayers List of winners(players) for the combination.
      */
     public static void addWinnerForTopLine(WinnersList winnersList, List<String> winningPlayers) {
@@ -83,7 +83,7 @@ public class WinningCombinationsHelper {
     }
     /**
      * Add full house  winner if combination not claimed.
-     * @param winnersList
+     * @param winnersList is key value pair of winning combination and winning player.
      * @param winningPlayers List of winners(players) for the combination.
      * @return return true to check winner, and stop game, else continue playing.
      */

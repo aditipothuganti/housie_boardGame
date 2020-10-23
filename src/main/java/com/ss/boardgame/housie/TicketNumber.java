@@ -17,9 +17,9 @@ public class TicketNumber {
 	public boolean getIsCalled() {
 		return this.isCalled;
 	}
-	
-	public void setisCalled() {
-		this.isCalled = true; 
+
+	public void setisCalled(boolean isNumberCalled) {
+		this.isCalled = isNumberCalled;
 	}
 	
 }

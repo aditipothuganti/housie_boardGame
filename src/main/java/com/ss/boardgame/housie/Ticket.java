@@ -17,7 +17,6 @@ public class Ticket {
         this.columns = columns;
         this.ticketData = ticketData;
         this.numberRange = numberRange;
-        // generateTicketNumbers(rows, columns, numberRange);
     }
 
     public int getRows() {
@@ -40,11 +39,11 @@ public class Ticket {
         return numberOfValuesTickedOff;
     }
 
-    public String getPlayerName() {
+    String getPlayerName() {
         return playerName;
     }
 
-    public void setPlayerName(String playerName) {
+    void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
 
@@ -68,27 +67,9 @@ public class Ticket {
         this.numberRange = numberRange;
     }
 
-    /*    private void generateTicketNumbers(int rows, int columns, int numberRange) {
-        int totalNumbers = rows * columns;
-        Set<Integer> ticketNumbersSet = new HashSet<>();
-        ticketData = new ArrayList<>();
-        while (ticketNumbersSet.size() <= totalNumbers) {
-            int randomNumber = random.nextInt(numberRange + 1);
-            if (randomNumber != 0)
-                ticketNumbersSet.add(randomNumber);
-        }
-
-        for (int i = 0; i < rows; i++) {
-            ticketData.add(new ArrayList<>());
-            for (int j = 0; j < columns; j++) {
-                int tnumber = ticketNumbersSet.iterator().next();
-                ticketNumbersSet.remove(tnumber);
-                TicketNumber ticketNumber = new TicketNumber(tnumber);
-                ticketData.get(i).add(ticketNumber);
-            }
-        }
-    }*/
-
+    /**
+     * Print the entire ticket for a player along with the status of each number.
+     */
     public void printTicket() {
         System.out.println("PRINTING TICKET");
         System.out.println(this.playerName);
@@ -104,11 +85,16 @@ public class Ticket {
         }
     }
 
+    /**
+     * The function marks the number on the ticket as called if present.
+     *
+     * @param numberToMark the number called randomly when the user presses N or n.
+     */
     public void markNumberOnTicket(int numberToMark) {
         List<TicketNumber> ticketNumbersList = ticketData.stream().flatMap(List::stream).collect(Collectors.toList());
         for (TicketNumber number : ticketNumbersList) {
             if (number.getNumber() == numberToMark && !number.getIsCalled()) {
-                number.setisCalled();
+                number.setisCalled(true);
                 numberOfValuesTickedOff += 1;
             }
         }
