@@ -1,9 +1,10 @@
-package com.ss.boardgame.housie.winningCombinations;
+package com.ss.boardgame.housie.helper;
 
-import com.ss.boardgame.housie.Player;
-import com.ss.boardgame.housie.Ticket;
-import com.ss.boardgame.housie.TicketNumber;
-import com.ss.boardgame.housie.WinnersList;
+import com.ss.boardgame.housie.model.Player;
+import com.ss.boardgame.housie.model.Ticket;
+import com.ss.boardgame.housie.model.TicketNumber;
+import com.ss.boardgame.housie.winningCombinations.WinnersList;
+import com.ss.boardgame.housie.constants.WinningCombinations;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Arrays;

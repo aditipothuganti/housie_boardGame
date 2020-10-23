@@ -1,11 +1,11 @@
-package com.ss.boardgame.housie;
+package com.ss.boardgame.housie.model;
 
 public class TicketNumber {
 
 	private int  number;
 	private boolean isCalled;
 
-	TicketNumber(int number ) {
+	public TicketNumber(int number ) {
 		this.number = number;
 		this.isCalled = false;
 	}

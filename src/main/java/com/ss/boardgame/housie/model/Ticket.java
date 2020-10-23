@@ -1,4 +1,4 @@
-package com.ss.boardgame.housie;
+package com.ss.boardgame.housie.model;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +12,7 @@ public class Ticket {
     private String playerName;
     private int numberRange;
 
-    Ticket(int rows, int columns, int numberRange, List<List<TicketNumber>> ticketData) {
+    public Ticket(int rows, int columns, int numberRange, List<List<TicketNumber>> ticketData) {
         this.rows = rows;
         this.columns = columns;
         this.ticketData = ticketData;
@@ -43,7 +43,7 @@ public class Ticket {
         return playerName;
     }
 
-    void setPlayerName(String playerName) {
+    public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
 

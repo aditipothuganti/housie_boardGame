@@ -1,5 +1,7 @@
 package com.ss.boardgame.housie;
 
+import com.ss.boardgame.housie.exception.UserInputException;
+
 import java.util.Scanner;
 
 import static com.ss.boardgame.housie.constants.HousieConstants.*;

@@ -1,4 +1,4 @@
-package com.ss.boardgame.housie;
+package com.ss.boardgame.housie.exception;
 
 public class UserInputException extends Exception {
 

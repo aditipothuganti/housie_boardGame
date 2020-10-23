@@ -1,4 +1,9 @@
-package com.ss.boardgame.housie;
+package com.ss.boardgame.housie.helper;
+
+import com.ss.boardgame.housie.model.HousieBoard;
+import com.ss.boardgame.housie.model.Player;
+import com.ss.boardgame.housie.model.Ticket;
+import com.ss.boardgame.housie.model.TicketNumber;
 
 import java.security.SecureRandom;
 import java.util.*;
@@ -25,6 +30,18 @@ public class GenerateGameHelper {
     }
 
     /**
+     * Generates the housie board numbers for the specified range.
+     */
+    public static HousieBoard generateBoardNumbers(HousieBoard housieBoard) {
+        for (int i = 1; i <= housieBoard.getTotalNumbersInHousieBoard(); i++) {
+            housieBoard.getBoardNumbers().add(i);
+            TicketNumber ticket = new TicketNumber(i);
+            housieBoard.getNumbersBoard().add(ticket);
+        }
+        return housieBoard;
+    }
+
+    /**
      * Generates a tickets with @param{rowsOfTicket} as rows and @param{numOfValuesPerRow} as columns
      * within a range of @param{numberRange}.
      * All the numbers in the ticket as unique.
@@ -39,7 +56,7 @@ public class GenerateGameHelper {
         Set<Integer> ticketNumbersSet = new HashSet<>();
         while (ticketNumbersSet.size() <= totalNumbers) {
             int randomNumber = random.nextInt(numberRange + 1);
-            if (randomNumber != 0)
+            if (randomNumber > 0)
                 ticketNumbersSet.add(randomNumber);
         }
         List<List<TicketNumber>> ticketData = new ArrayList<>();
@@ -47,9 +64,9 @@ public class GenerateGameHelper {
             ticketData.add(new ArrayList<>());
             for (int j = 0; j < numOfValuesPerRow; j++) {
                 int tnumber = ticketNumbersSet.iterator().next();
-                ticketNumbersSet.remove(tnumber);
                 TicketNumber ticketNumber = new TicketNumber(tnumber);
                 ticketData.get(i).add(ticketNumber);
+                ticketNumbersSet.remove(tnumber);
             }
         }
         return ticketData;

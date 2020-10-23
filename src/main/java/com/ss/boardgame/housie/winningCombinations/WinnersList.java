@@ -1,6 +1,6 @@
-package com.ss.boardgame.housie;
+package com.ss.boardgame.housie.winningCombinations;
 
-import com.ss.boardgame.housie.winningCombinations.WinningCombinations;
+import com.ss.boardgame.housie.constants.WinningCombinations;
 
 import java.util.LinkedHashMap;
 import java.util.List;

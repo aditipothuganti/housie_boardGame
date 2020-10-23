@@ -1,19 +1,21 @@
-package com.ss.boardgame.housie;
+package com.ss.boardgame.housie.model;
 
+import com.ss.boardgame.housie.UserInputs;
+import com.ss.boardgame.housie.winningCombinations.WinnersList;
 import com.ss.boardgame.housie.constants.GameStatus;
-import com.ss.boardgame.housie.winningCombinations.WinningCombinations;
+import com.ss.boardgame.housie.constants.WinningCombinations;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-import static com.ss.boardgame.housie.GenerateGameHelper.*;
-import static com.ss.boardgame.housie.winningCombinations.WinningCombinationsHelper.*;
+import static com.ss.boardgame.housie.helper.GenerateGameHelper.*;
+import static com.ss.boardgame.housie.helper.WinningCombinationsHelper.*;
 
 public class Caller {
 
-    private int numberRange, numOfPlayers, rowsOfTicket, columnsOfTicket, numOfValuesPerRow;
+    private int numberRange, numOfPlayers, rowsOfTicket, numOfValuesPerRow;
     private List<String> earlyFiveWinningPlayers = new ArrayList<>();
     private List<String> topLineWinningPlayers = new ArrayList<>();
     private List<String> fullHouseWinningPlayers = new ArrayList<>();
@@ -27,12 +29,12 @@ public class Caller {
         this.numberRange = userInputs.getNumberRange();
         this.numOfPlayers = userInputs.getNumOfPlayers();
         this.rowsOfTicket = userInputs.getRowsOfTicket();
-        this.columnsOfTicket = userInputs.getColumnsOfTicket();
         this.numOfValuesPerRow = userInputs.getNumOfValuesPerRow();
     }
 
     public String startPlaying() {
         housieBoard = new HousieBoard(numberRange);
+        generateBoardNumbers(housieBoard);
         gameStatus = GameStatus.INPROGRESS;
         winnersList = new WinnersList();
         Scanner scanner = new Scanner(System.in);
