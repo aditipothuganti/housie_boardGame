@@ -53,7 +53,7 @@ public class GenerateGameHelper {
     public static List<List<TicketNumber>> generateTicketData(int rowsOfTicket, int numOfValuesPerRow, int numberRange) {
         int totalNumbers = rowsOfTicket * numOfValuesPerRow;
         Set<Integer> ticketNumbersSet = new HashSet<>();
-        while (ticketNumbersSet.size() <= totalNumbers) {
+        while (totalNumbers>ticketNumbersSet.size()) {
             int randomNumber = random.nextInt(numberRange + 1);
             if (randomNumber > 0)
                 ticketNumbersSet.add(randomNumber);

@@ -1,7 +1,5 @@
 package com.ss.boardgame.housie.model;
 
-import com.ss.boardgame.housie.exception.UserInputException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,14 +17,6 @@ public class HousieBoard {
 
     public void setNumbersMarkedTillNow(int numbersMarkedTillNow) {
         this.numbersMarkedTillNow = numbersMarkedTillNow;
-    }
-
-    public void setTotalNumbersInHousieBoard(int totalNumbersInHousieBoard) throws UserInputException {
-        if (totalNumbersInHousieBoard < 1) {
-            throw new UserInputException("No of Values on board should be greater than 1 ");
-        } else {
-            this.totalNumbersInHousieBoard = totalNumbersInHousieBoard;
-        }
     }
 
     public HousieBoard(int numbers) {

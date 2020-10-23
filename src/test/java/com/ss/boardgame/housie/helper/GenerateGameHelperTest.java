@@ -1,6 +1,5 @@
 package com.ss.boardgame.housie.helper;
 
-import com.ss.boardgame.housie.exception.UserInputException;
 import com.ss.boardgame.housie.model.HousieBoard;
 import com.ss.boardgame.housie.model.Player;
 import com.ss.boardgame.housie.model.Ticket;
@@ -17,11 +16,11 @@ import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class GenerateGameHelperTest {
-    HousieBoard housieBoard;
-    HousieBoard generatedHousieBoardWith90Numbers;
-    int rows = 3;
-    int columns = 5;
-    int range = 90;
+    private HousieBoard housieBoard;
+    private HousieBoard generatedHousieBoardWith90Numbers;
+    private int rows = 3;
+    private int columns = 5;
+    private int range = 90;
 
     @Before
     public void setUp() {
@@ -30,20 +29,20 @@ public class GenerateGameHelperTest {
     }
 
     @Test
-    public void generateNewNumberWithInGivenRange() {
+    public void test_generateNewNumberWithInGivenRange() {
         assertTrue(GenerateGameHelper.generateNewNumber(housieBoard) > 0);
         assertTrue(GenerateGameHelper.generateNewNumber(housieBoard) <= 90);
     }
 
     @Test
-    public void generateBoardNumbers() {
+    public void test_generateBoardNumbers() {
         assertEquals(90, generatedHousieBoardWith90Numbers.getBoardNumbers().size());
         assertEquals(0, generatedHousieBoardWith90Numbers.getNumbersMarkedTillNow());
         assertEquals(90, generatedHousieBoardWith90Numbers.getTotalNumbersInHousieBoard());
     }
 
     @Test
-    public void generateBoardNumbersAndCheckThatAllValuesAreMarkedFalseInitially() {
+    public void test_generateBoardNumbersAndCheckThatAllValuesAreMarkedFalseInitially() {
         housieBoard = new HousieBoard(3);
         HousieBoard generatedHousieWith3Numbers = GenerateGameHelper.generateBoardNumbers(housieBoard);
         assertEquals(3, generatedHousieWith3Numbers.getAllTicketNumbersBoard().size());
@@ -53,7 +52,7 @@ public class GenerateGameHelperTest {
     }
 
     @Test
-    public void generateTicketDataShouldHaveCorrectRowsAndColumns() throws UserInputException {
+    public void test_generateTicketDataShouldHaveCorrectRowsAndColumns() {
 
         List<List<TicketNumber>> ticketGenerated = GenerateGameHelper.generateTicketData(rows, columns, range);
         assertEquals(ticketGenerated.size(), rows);
@@ -61,7 +60,7 @@ public class GenerateGameHelperTest {
     }
 
     @Test
-    public void generateTicketDataShouldHaveIsCalledFalse() throws UserInputException {
+    public void test_generateTicketDataShouldHaveIsCalledFalse() {
         List<List<TicketNumber>> ticketGenerated = GenerateGameHelper.generateTicketData(rows, columns, range);
         for (List<TicketNumber> ticketLine : ticketGenerated) {
             for (TicketNumber ticketNumber : ticketLine) {
@@ -87,6 +86,6 @@ public class GenerateGameHelperTest {
         List<Player> playersInGame = GenerateGameHelper.generatePlayers(rows, columns, range, 3);
         Set<Ticket> ticketsInSequence = GenerateGameHelper.getAllTicketsForPlayersInSequence(playersInGame);
         assertEquals("Player: 1", ticketsInSequence.iterator().next().getPlayerName());
-        assertEquals(ticketsInSequence.size(), 3);
+        assertEquals(3, ticketsInSequence.size());
     }
 }
