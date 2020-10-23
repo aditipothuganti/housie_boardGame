@@ -31,15 +31,8 @@ public class HousieBoard {
         return totalNumbersInHousieBoard;
     }
 
-    public void setBoardNumbers(List<Integer> boardNumbers) {
-        this.boardNumbers = boardNumbers;
-    }
-
-    public List<TicketNumber> getNumbersBoard() {
+    public List<TicketNumber> getAllTicketNumbersBoard() {
         return numbersBoard;
     }
 
-    public void setNumbersBoard(List<TicketNumber> numbersBoard) {
-        this.numbersBoard = numbersBoard;
-    }
 }

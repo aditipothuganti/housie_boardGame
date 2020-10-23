@@ -26,7 +26,6 @@ public class GenerateGameHelper {
         housieBoard.getBoardNumbers().remove(Integer.valueOf(generatedNumber));
         housieBoard.setNumbersMarkedTillNow(housieBoard.getNumbersMarkedTillNow() + 1);
         return generatedNumber;
-
     }
 
     /**
@@ -36,7 +35,7 @@ public class GenerateGameHelper {
         for (int i = 1; i <= housieBoard.getTotalNumbersInHousieBoard(); i++) {
             housieBoard.getBoardNumbers().add(i);
             TicketNumber ticket = new TicketNumber(i);
-            housieBoard.getNumbersBoard().add(ticket);
+            housieBoard.getAllTicketNumbersBoard().add(ticket);
         }
         return housieBoard;
     }
@@ -46,15 +45,15 @@ public class GenerateGameHelper {
      * within a range of @param{numberRange}.
      * All the numbers in the ticket as unique.
      *
-     * @param rowsOfTicket number of rows in a ticket
+     * @param rowsOfTicket      number of rows in a ticket
      * @param numOfValuesPerRow number of columns in a ticket
-     * @param numberRange range for the values in a ticket.
+     * @param numberRange       range for the values in a ticket.
      * @return Ticket with unique ticket numbers.
      */
     public static List<List<TicketNumber>> generateTicketData(int rowsOfTicket, int numOfValuesPerRow, int numberRange) {
         int totalNumbers = rowsOfTicket * numOfValuesPerRow;
         Set<Integer> ticketNumbersSet = new HashSet<>();
-        while (ticketNumbersSet.size() <= totalNumbers) {
+        while (totalNumbers>ticketNumbersSet.size()) {
             int randomNumber = random.nextInt(numberRange + 1);
             if (randomNumber > 0)
                 ticketNumbersSet.add(randomNumber);
@@ -76,10 +75,10 @@ public class GenerateGameHelper {
      * Generate all the players in game specified by the user or defaulted to 5 other wise.
      * Associate a single ticket for a player.
      *
-     * @param rowsOfTicket number of rows for the ticket
+     * @param rowsOfTicket      number of rows for the ticket
      * @param numOfValuesPerRow values for each row
-     * @param numberRange the ticket number range
-     * @param numOfPlayers number of  players in the game
+     * @param numberRange       the ticket number range
+     * @param numOfPlayers      number of  players in the game
      * @return list of the players in the game.
      */
     public static List<Player> generatePlayers(int rowsOfTicket, int numOfValuesPerRow, int numberRange, int numOfPlayers) {
@@ -99,7 +98,7 @@ public class GenerateGameHelper {
         return playersInPlay;
     }
 
-    public static Set<Ticket> generateTicket(List<Player> playersInPlay) {
+    public static Set<Ticket> getAllTicketsForPlayersInSequence(List<Player> playersInPlay) {
         return playersInPlay.stream().map(Player::getTicket).collect(Collectors.toCollection(LinkedHashSet::new));
     }
 }

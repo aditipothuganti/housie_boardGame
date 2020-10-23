@@ -2,24 +2,24 @@ package com.ss.boardgame.housie.model;
 
 public class TicketNumber {
 
-	private int  number;
-	private boolean isCalled;
+    private int number;
+    private boolean isCalled;
 
-	public TicketNumber(int number ) {
-		this.number = number;
-		this.isCalled = false;
-	}
+    public TicketNumber(int number) {
+        this.number = number;
+        this.isCalled = false;
+    }
 
-	public int getNumber() {
-		return this.number;
-	}
-	
-	public boolean getIsCalled() {
-		return this.isCalled;
-	}
+    public int getNumber() {
+        return this.number;
+    }
 
-	public void setisCalled(boolean isNumberCalled) {
-		this.isCalled = isNumberCalled;
-	}
-	
+    public boolean getIsCalled() {
+        return this.isCalled;
+    }
+
+    public void setisCalled(boolean isNumberCalled) {
+        this.isCalled = isNumberCalled;
+    }
+
 }

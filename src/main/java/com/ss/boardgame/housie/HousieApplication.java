@@ -5,12 +5,10 @@ import com.ss.boardgame.housie.model.Caller;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.io.IOException;
-
 @SpringBootApplication
 public class HousieApplication {
 
-    public static void main(String[] args) throws UserInputException, IOException {
+    public static void main(String[] args) throws UserInputException {
         SpringApplication.run(HousieApplication.class, args);
         UserInputs userInputs = new UserInputs();
         UserInputs response = userInputs.setUserInputsFromPrompt();
