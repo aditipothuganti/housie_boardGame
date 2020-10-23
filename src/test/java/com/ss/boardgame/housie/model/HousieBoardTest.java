@@ -1,14 +1,15 @@
 package com.ss.boardgame.housie.model;
 
-import org.junit.jupiter.api.Test;
 
-class HousieBoardTest {
+import org.junit.Test;
+
+public class HousieBoardTest {
 
     @Test
-    void setNumbersMarkedTillNow() {
+    public void setNumbersMarkedTillNow() {
     }
 
     @Test
-    void getAllTicketNumbersBoard() {
+    public void getAllTicketNumbersBoard() {
     }
 }

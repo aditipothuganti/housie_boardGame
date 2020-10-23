@@ -1,42 +1,39 @@
 package com.ss.boardgame.housie.helper;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-class WinningCombinationsHelperTest {
+@RunWith(JUnit4.class)
+public class WinningCombinationsHelperTest {
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
+
+    @Test
+    public void checkForEarlyFiveReturnFalseIfTicketIsMarkedLessThan5() {
+
     }
 
     @Test
-    void checkForEarlyFiveReturnFalseIfTicketIsMarkedLessThan5() {
-
+    public void addWinnerForEarlyFive() {
     }
 
     @Test
-    void addWinnerForEarlyFive() {
+    public void checkForTopLine() {
     }
 
     @Test
-    void checkForTopLine() {
+    public void checkForFullHouse() {
     }
 
     @Test
-    void checkForFullHouse() {
+    public void addWinnerForTopLine() {
     }
 
     @Test
-    void addWinnerForTopLine() {
+    public void addWinnerForFullHouse() {
     }
 
     @Test
-    void addWinnerForFullHouse() {
-    }
-
-    @Test
-    void getAllPlayersStatus() {
+    public void getAllPlayersStatus() {
     }
 }

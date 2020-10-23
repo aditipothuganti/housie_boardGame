@@ -5,48 +5,45 @@ import com.ss.boardgame.housie.model.HousieBoard;
 import com.ss.boardgame.housie.model.Player;
 import com.ss.boardgame.housie.model.Ticket;
 import com.ss.boardgame.housie.model.TicketNumber;
-import org.junit.Rule;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.rules.ExpectedException;
-import org.mockito.MockitoAnnotations;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-class GenerateGameHelperTest {
+@RunWith(JUnit4.class)
+public class GenerateGameHelperTest {
     HousieBoard housieBoard;
     HousieBoard generatedHousieBoardWith90Numbers;
     int rows = 3;
     int columns = 5;
     int range = 90;
-    @Rule
-    public ExpectedException expectedEx = ExpectedException.none();
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
+    @Before
+    public void setUp() {
         housieBoard = new HousieBoard(90);
         generatedHousieBoardWith90Numbers = GenerateGameHelper.generateBoardNumbers(housieBoard);
     }
 
     @Test
-    void generateNewNumberWithInGivenRange() {
+    public void generateNewNumberWithInGivenRange() {
         assertTrue(GenerateGameHelper.generateNewNumber(housieBoard) > 0);
         assertTrue(GenerateGameHelper.generateNewNumber(housieBoard) <= 90);
     }
 
     @Test
-    void generateBoardNumbers() {
+    public void generateBoardNumbers() {
         assertEquals(90, generatedHousieBoardWith90Numbers.getBoardNumbers().size());
         assertEquals(0, generatedHousieBoardWith90Numbers.getNumbersMarkedTillNow());
         assertEquals(90, generatedHousieBoardWith90Numbers.getTotalNumbersInHousieBoard());
     }
 
     @Test
-    void generateBoardNumbersAndCheckThatAllValuesAreMarkedFalseInitially() {
+    public void generateBoardNumbersAndCheckThatAllValuesAreMarkedFalseInitially() {
         housieBoard = new HousieBoard(3);
         HousieBoard generatedHousieWith3Numbers = GenerateGameHelper.generateBoardNumbers(housieBoard);
         assertEquals(3, generatedHousieWith3Numbers.getAllTicketNumbersBoard().size());
@@ -56,7 +53,7 @@ class GenerateGameHelperTest {
     }
 
     @Test
-    void generateTicketDataShouldHaveCorrectRowsAndColumns() throws UserInputException {
+    public void generateTicketDataShouldHaveCorrectRowsAndColumns() throws UserInputException {
 
         List<List<TicketNumber>> ticketGenerated = GenerateGameHelper.generateTicketData(rows, columns, range);
         assertEquals(ticketGenerated.size(), rows);
@@ -64,7 +61,7 @@ class GenerateGameHelperTest {
     }
 
     @Test
-    void generateTicketDataShouldHaveIsCalledFalse() throws UserInputException {
+    public void generateTicketDataShouldHaveIsCalledFalse() throws UserInputException {
         List<List<TicketNumber>> ticketGenerated = GenerateGameHelper.generateTicketData(rows, columns, range);
         for (List<TicketNumber> ticketLine : ticketGenerated) {
             for (TicketNumber ticketNumber : ticketLine) {
@@ -75,7 +72,7 @@ class GenerateGameHelperTest {
 
 
     @Test
-    void generatePlayersAndCheckIfEachPlayerHasSingleTicket() {
+    public void generatePlayersAndCheckIfEachPlayerHasSingleTicket() {
         int numOfPlayers = 3;
         List<Player> playersInGame = GenerateGameHelper.generatePlayers(rows, columns, range, 3);
         assertEquals(playersInGame.size(), numOfPlayers);
@@ -86,7 +83,7 @@ class GenerateGameHelperTest {
     }
 
     @Test
-    void getAllTicketsForPlayersInSequence() {
+    public void getAllTicketsForPlayersInSequence() {
         List<Player> playersInGame = GenerateGameHelper.generatePlayers(rows, columns, range, 3);
         Set<Ticket> ticketsInSequence = GenerateGameHelper.getAllTicketsForPlayersInSequence(playersInGame);
         assertEquals("Player: 1", ticketsInSequence.iterator().next().getPlayerName());

@@ -45,9 +45,9 @@ public class GenerateGameHelper {
      * within a range of @param{numberRange}.
      * All the numbers in the ticket as unique.
      *
-     * @param rowsOfTicket number of rows in a ticket
+     * @param rowsOfTicket      number of rows in a ticket
      * @param numOfValuesPerRow number of columns in a ticket
-     * @param numberRange range for the values in a ticket.
+     * @param numberRange       range for the values in a ticket.
      * @return Ticket with unique ticket numbers.
      */
     public static List<List<TicketNumber>> generateTicketData(int rowsOfTicket, int numOfValuesPerRow, int numberRange) {
@@ -75,10 +75,10 @@ public class GenerateGameHelper {
      * Generate all the players in game specified by the user or defaulted to 5 other wise.
      * Associate a single ticket for a player.
      *
-     * @param rowsOfTicket number of rows for the ticket
+     * @param rowsOfTicket      number of rows for the ticket
      * @param numOfValuesPerRow values for each row
-     * @param numberRange the ticket number range
-     * @param numOfPlayers number of  players in the game
+     * @param numberRange       the ticket number range
+     * @param numOfPlayers      number of  players in the game
      * @return list of the players in the game.
      */
     public static List<Player> generatePlayers(int rowsOfTicket, int numOfValuesPerRow, int numberRange, int numOfPlayers) {

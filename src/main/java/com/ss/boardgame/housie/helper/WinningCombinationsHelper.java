@@ -1,11 +1,11 @@
 package com.ss.boardgame.housie.helper;
 
+import com.ss.boardgame.housie.constants.WinningCombinations;
 import com.ss.boardgame.housie.model.Player;
 import com.ss.boardgame.housie.model.Ticket;
 import com.ss.boardgame.housie.model.TicketNumber;
 import com.ss.boardgame.housie.winningCombinations.WinnersList;
-import com.ss.boardgame.housie.constants.WinningCombinations;
-import org.springframework.util.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -17,7 +17,8 @@ import static com.ss.boardgame.housie.constants.HousieConstants.*;
 public class WinningCombinationsHelper {
 
     /**
-     *  Condition to check if a tickets has won the early 5.
+     * Condition to check if a tickets has won the early 5.
+     *
      * @param ticket has a List of List of ticket numbers
      * @return true if condition met, false if not met.
      */
@@ -27,7 +28,8 @@ public class WinningCombinationsHelper {
 
     /**
      * Add early 5 winner if combination not claimed.
-     * @param winnersList is key value pair of winning combination and winning player.
+     *
+     * @param winnersList    is key value pair of winning combination and winning player.
      * @param winningPlayers List of winners(players) for the combination.
      */
     public static void addWinnerForEarlyFive(WinnersList winnersList, List<String> winningPlayers) {
@@ -43,6 +45,7 @@ public class WinningCombinationsHelper {
 
     /**
      * Check if the top line has been completed.
+     *
      * @param ticket has a List of List of ticket numbers
      * @return true if condition met, else false.
      */
@@ -53,7 +56,8 @@ public class WinningCombinationsHelper {
 
     /**
      * Check if entire ticket has been marked with all the called numbers.
-     * @param ticket has a List of List of ticket numbers
+     *
+     * @param ticket       has a List of List of ticket numbers
      * @param rowsOfTicket number of rows for each ticket.
      * @return true if condition met, else return false.
      */
@@ -68,7 +72,8 @@ public class WinningCombinationsHelper {
 
     /**
      * Add top line winner if combination not claimed.
-     * @param winnersList is key value pair of winning combination and winning player.
+     *
+     * @param winnersList    is key value pair of winning combination and winning player.
      * @param winningPlayers List of winners(players) for the combination.
      */
     public static void addWinnerForTopLine(WinnersList winnersList, List<String> winningPlayers) {
@@ -82,9 +87,11 @@ public class WinningCombinationsHelper {
             System.out.println(winnersList.getWinnersList().get(WinningCombinations.FIRST_ROW).toString());
         }
     }
+
     /**
      * Add full house  winner if combination not claimed.
-     * @param winnersList is key value pair of winning combination and winning player.
+     *
+     * @param winnersList    is key value pair of winning combination and winning player.
      * @param winningPlayers List of winners(players) for the combination.
      * @return return true to check winner, and stop game, else continue playing.
      */
@@ -104,9 +111,10 @@ public class WinningCombinationsHelper {
 
     /**
      * Get the summary of all players after the game is done.
-     * @param playersInPlay number of players.
-     * @param earlyFiveWinningPlayers   winners for Early 5 combination.
-     * @param topLineWinningPlayers winners for topline combination.
+     *
+     * @param playersInPlay           number of players.
+     * @param earlyFiveWinningPlayers winners for Early 5 combination.
+     * @param topLineWinningPlayers   winners for topline combination.
      * @param fullHouseWinningPlayers winners for full house combination.
      * @return String of game summary.
      */

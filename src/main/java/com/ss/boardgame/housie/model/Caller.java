@@ -69,7 +69,8 @@ public class Caller {
     /**
      * Returns a new integer generated from the range of values in a random manner with
      * out any duplicates.
-     * @return  the new number to be called by the housie board
+     *
+     * @return the new number to be called by the housie board
      */
     private int generateNumber() {
         int newGeneratedNumber = generateNewNumber(housieBoard);
