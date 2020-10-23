@@ -1,6 +1,5 @@
 package com.ss.boardgame.housie.helper;
 
-import com.ss.boardgame.housie.exception.UserInputException;
 import com.ss.boardgame.housie.model.HousieBoard;
 import com.ss.boardgame.housie.model.Player;
 import com.ss.boardgame.housie.model.Ticket;
@@ -17,11 +16,11 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GenerateGameHelperTest {
-    HousieBoard housieBoard;
-    HousieBoard generatedHousieBoardWith90Numbers;
-    int rows = 3;
-    int columns = 5;
-    int range = 90;
+    private HousieBoard housieBoard;
+    private HousieBoard generatedHousieBoardWith90Numbers;
+    private int rows = 3;
+    private int columns = 5;
+    private int range = 90;
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
 
@@ -56,7 +55,7 @@ class GenerateGameHelperTest {
     }
 
     @Test
-    void generateTicketDataShouldHaveCorrectRowsAndColumns() throws UserInputException {
+    void generateTicketDataShouldHaveCorrectRowsAndColumns() {
 
         List<List<TicketNumber>> ticketGenerated = GenerateGameHelper.generateTicketData(rows, columns, range);
         assertEquals(ticketGenerated.size(), rows);
@@ -64,7 +63,7 @@ class GenerateGameHelperTest {
     }
 
     @Test
-    void generateTicketDataShouldHaveIsCalledFalse() throws UserInputException {
+    void generateTicketDataShouldHaveIsCalledFalse() {
         List<List<TicketNumber>> ticketGenerated = GenerateGameHelper.generateTicketData(rows, columns, range);
         for (List<TicketNumber> ticketLine : ticketGenerated) {
             for (TicketNumber ticketNumber : ticketLine) {
@@ -90,6 +89,6 @@ class GenerateGameHelperTest {
         List<Player> playersInGame = GenerateGameHelper.generatePlayers(rows, columns, range, 3);
         Set<Ticket> ticketsInSequence = GenerateGameHelper.getAllTicketsForPlayersInSequence(playersInGame);
         assertEquals("Player: 1", ticketsInSequence.iterator().next().getPlayerName());
-        assertEquals(ticketsInSequence.size(), 3);
+        assertEquals(3, ticketsInSequence.size());
     }
 }

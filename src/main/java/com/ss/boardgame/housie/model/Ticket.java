@@ -23,16 +23,8 @@ public class Ticket {
         return rows;
     }
 
-    public void setRows(int rows) {
-        this.rows = rows;
-    }
-
     public int getColumns() {
         return columns;
-    }
-
-    public void setColumns(int columns) {
-        this.columns = columns;
     }
 
     public int getNumberOfValuesTickedOff() {
@@ -51,20 +43,8 @@ public class Ticket {
         return ticketData;
     }
 
-    public List<List<TicketNumber>> setTicketData(List<List<TicketNumber>> ticketData) {
-        return ticketData;
-    }
-
-    public void setNumberOfValuesTickedOff(int numberOfValuesTickedOff) {
-        this.numberOfValuesTickedOff = numberOfValuesTickedOff;
-    }
-
     public int getNumberRange() {
         return numberRange;
-    }
-
-    public void setNumberRange(int numberRange) {
-        this.numberRange = numberRange;
     }
 
     /**
