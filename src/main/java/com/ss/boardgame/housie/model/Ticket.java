@@ -39,7 +39,7 @@ public class Ticket {
         return numberOfValuesTickedOff;
     }
 
-    String getPlayerName() {
+    public String getPlayerName() {
         return playerName;
     }
 

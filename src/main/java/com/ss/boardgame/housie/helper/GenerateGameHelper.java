@@ -26,7 +26,6 @@ public class GenerateGameHelper {
         housieBoard.getBoardNumbers().remove(Integer.valueOf(generatedNumber));
         housieBoard.setNumbersMarkedTillNow(housieBoard.getNumbersMarkedTillNow() + 1);
         return generatedNumber;
-
     }
 
     /**
@@ -36,7 +35,7 @@ public class GenerateGameHelper {
         for (int i = 1; i <= housieBoard.getTotalNumbersInHousieBoard(); i++) {
             housieBoard.getBoardNumbers().add(i);
             TicketNumber ticket = new TicketNumber(i);
-            housieBoard.getNumbersBoard().add(ticket);
+            housieBoard.getAllTicketNumbersBoard().add(ticket);
         }
         return housieBoard;
     }
@@ -99,7 +98,7 @@ public class GenerateGameHelper {
         return playersInPlay;
     }
 
-    public static Set<Ticket> generateTicket(List<Player> playersInPlay) {
+    public static Set<Ticket> getAllTicketsForPlayersInSequence(List<Player> playersInPlay) {
         return playersInPlay.stream().map(Player::getTicket).collect(Collectors.toCollection(LinkedHashSet::new));
     }
 }

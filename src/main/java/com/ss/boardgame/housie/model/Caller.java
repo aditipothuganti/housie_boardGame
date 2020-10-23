@@ -1,9 +1,10 @@
 package com.ss.boardgame.housie.model;
 
 import com.ss.boardgame.housie.UserInputs;
-import com.ss.boardgame.housie.winningCombinations.WinnersList;
 import com.ss.boardgame.housie.constants.GameStatus;
 import com.ss.boardgame.housie.constants.WinningCombinations;
+import com.ss.boardgame.housie.exception.UserInputException;
+import com.ss.boardgame.housie.winningCombinations.WinnersList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class Caller {
         this.numOfValuesPerRow = userInputs.getNumOfValuesPerRow();
     }
 
-    public String startPlaying() {
+    public String startPlaying() throws UserInputException {
         housieBoard = new HousieBoard(numberRange);
         generateBoardNumbers(housieBoard);
         gameStatus = GameStatus.INPROGRESS;
@@ -40,7 +41,7 @@ public class Caller {
         Scanner scanner = new Scanner(System.in);
         String result = "";
         List<Player> playersInPlay = generatePlayers(rowsOfTicket, numOfValuesPerRow, numberRange, numOfPlayers);
-        ticketsInPlay = generateTicket(playersInPlay);
+        ticketsInPlay = getAllTicketsForPlayersInSequence(playersInPlay);
         while (housieBoard.getNumbersMarkedTillNow() <= housieBoard.getTotalNumbersInHousieBoard() && gameStatus == GameStatus.INPROGRESS && result.isEmpty()) {
             System.out.println("Enter N to generate Number or Enter P to Print Current Status of All Tickets");
             char enterCharacter = scanner.next().charAt(0);
