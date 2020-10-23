@@ -92,24 +92,7 @@ public class Caller {
      */
     private String markAllTicketsWithGeneratedNumber(int numberToMark) {
         StringBuilder completeWinnerList = new StringBuilder();
-        for (Ticket ticket : ticketsInPlay) {
-            ticket.markNumberOnTicket(numberToMark);
-            if (housieBoard.getNumbersMarkedTillNow() >= 5 && !winnersList.getWinnersList().containsKey(WinningCombinations.EARLY_FIVE)) {
-                if (checkForEarlyFive(ticket)) {
-                    earlyFiveWinningPlayers.add(ticket.getPlayerName());
-                }
-            }
-            if (housieBoard.getNumbersMarkedTillNow() >= numOfValuesPerRow && !winnersList.getWinnersList().containsKey(WinningCombinations.FIRST_ROW)) {
-                if (checkForTopLine(ticket)) {
-                    topLineWinningPlayers.add(ticket.getPlayerName());
-                }
-            }
-            if (housieBoard.getNumbersMarkedTillNow() >= (numOfValuesPerRow * rowsOfTicket) && !winnersList.getWinnersList().containsKey(WinningCombinations.FULL_HOUSE)) {
-                if (checkForFullHouse(ticket, rowsOfTicket)) {
-                    fullHouseWinningPlayers.add(ticket.getPlayerName());
-                }
-            }
-        }
+        markWinnersIfNumberGeneratedMatches(numberToMark);
         if (!winnersList.getWinnersList().containsKey(WinningCombinations.EARLY_FIVE)) {
             addWinnerForEarlyFive(winnersList, earlyFiveWinningPlayers);
         }
@@ -126,6 +109,21 @@ public class Caller {
             }
         }
         return completeWinnerList.toString();
+    }
+
+    private void markWinnersIfNumberGeneratedMatches(int numberToMark){
+        for (Ticket ticket : ticketsInPlay) {
+            ticket.markNumberOnTicket(numberToMark);
+            if (housieBoard.getNumbersMarkedTillNow() >= 5 && !winnersList.getWinnersList().containsKey(WinningCombinations.EARLY_FIVE) && checkForEarlyFive(ticket)) {
+                earlyFiveWinningPlayers.add(ticket.getPlayerName());
+            }
+            if (housieBoard.getNumbersMarkedTillNow() >= numOfValuesPerRow && !winnersList.getWinnersList().containsKey(WinningCombinations.FIRST_ROW) && (checkForTopLine(ticket))) {
+                topLineWinningPlayers.add(ticket.getPlayerName());
+            }
+            if (housieBoard.getNumbersMarkedTillNow() >= (numOfValuesPerRow * rowsOfTicket) && !winnersList.getWinnersList().containsKey(WinningCombinations.FULL_HOUSE) && checkForFullHouse(ticket, rowsOfTicket)) {
+                fullHouseWinningPlayers.add(ticket.getPlayerName());
+            }
+        }
     }
 
 }
