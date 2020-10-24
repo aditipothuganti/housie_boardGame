@@ -6,6 +6,7 @@ import com.ss.boardgame.housie.model.Ticket;
 import com.ss.boardgame.housie.model.TicketNumber;
 import com.ss.boardgame.housie.model.WinnersList;
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,7 @@ import java.util.Map;
 import static com.ss.boardgame.housie.constants.HousieConstants.*;
 
 @Component
-@Scope(value = "singleton")
+@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class WinningCombinationsHelper {
 
     /**

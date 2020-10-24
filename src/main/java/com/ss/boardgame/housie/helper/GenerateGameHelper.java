@@ -4,17 +4,19 @@ import com.ss.boardgame.housie.model.HousieBoard;
 import com.ss.boardgame.housie.model.Player;
 import com.ss.boardgame.housie.model.Ticket;
 import com.ss.boardgame.housie.model.TicketNumber;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.stream.Collectors;
 
-//A helper class to generate the players, tickets before starting the game
+/**
+ * A utility class to generate the players, tickets before starting the game.
+ */
 @Component
-@Scope(value = "singleton")
+@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class GenerateGameHelper {
 
     private final static SecureRandom random = new SecureRandom();
@@ -62,7 +64,7 @@ public class GenerateGameHelper {
     public List<List<TicketNumber>> generateTicketData(int rowsOfTicket, int numOfValuesPerRow, int numberRange) {
         int totalNumbers = rowsOfTicket * numOfValuesPerRow;
         Set<Integer> ticketNumbersSet = new HashSet<>();
-        while (totalNumbers>ticketNumbersSet.size()) {
+        while (totalNumbers > ticketNumbersSet.size()) {
             int randomNumber = random.nextInt(numberRange + 1);
             if (randomNumber > 0)
                 ticketNumbersSet.add(randomNumber);
