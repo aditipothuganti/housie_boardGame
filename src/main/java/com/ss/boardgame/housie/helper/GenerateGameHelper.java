@@ -4,12 +4,17 @@ import com.ss.boardgame.housie.model.HousieBoard;
 import com.ss.boardgame.housie.model.Player;
 import com.ss.boardgame.housie.model.Ticket;
 import com.ss.boardgame.housie.model.TicketNumber;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.stream.Collectors;
 
 //A helper class to generate the players, tickets before starting the game
+@Component
+@Scope(value = "singleton")
 public class GenerateGameHelper {
 
     private final static SecureRandom random = new SecureRandom();
@@ -20,7 +25,7 @@ public class GenerateGameHelper {
      * @param housieBoard has all the numbers from 1 to range of values.
      * @return unique number within the range of values user specified.
      */
-    public static int generateNewNumber(HousieBoard housieBoard) {
+    public int generateNewNumber(HousieBoard housieBoard) {
         Random randomizer = new Random();
         int generatedNumber = housieBoard.getBoardNumbers().get(randomizer.nextInt(housieBoard.getBoardNumbers().size()));
         housieBoard.getBoardNumbers().remove(Integer.valueOf(generatedNumber));
@@ -31,11 +36,15 @@ public class GenerateGameHelper {
     /**
      * Generates the housie board numbers for the specified range.
      */
-    public static HousieBoard generateBoardNumbers(HousieBoard housieBoard) {
+    public HousieBoard generateBoardNumbers(HousieBoard housieBoard) {
         for (int i = 1; i <= housieBoard.getTotalNumbersInHousieBoard(); i++) {
-            housieBoard.getBoardNumbers().add(i);
+            List<Integer> housieBoardNumbers = housieBoard.getBoardNumbers();
+            housieBoardNumbers.add(i);
+            housieBoard.setBoardNumbers(housieBoardNumbers);
             TicketNumber ticket = new TicketNumber(i);
-            housieBoard.getAllTicketNumbersBoard().add(ticket);
+            List<TicketNumber> ticketNumbersOnBoard = housieBoard.getAllTicketNumbersOnBoard();
+            ticketNumbersOnBoard.add(ticket);
+            housieBoard.setAllTicketNumbersOnBoard(ticketNumbersOnBoard);
         }
         return housieBoard;
     }
@@ -50,7 +59,7 @@ public class GenerateGameHelper {
      * @param numberRange       range for the values in a ticket.
      * @return Ticket with unique ticket numbers.
      */
-    public static List<List<TicketNumber>> generateTicketData(int rowsOfTicket, int numOfValuesPerRow, int numberRange) {
+    public List<List<TicketNumber>> generateTicketData(int rowsOfTicket, int numOfValuesPerRow, int numberRange) {
         int totalNumbers = rowsOfTicket * numOfValuesPerRow;
         Set<Integer> ticketNumbersSet = new HashSet<>();
         while (totalNumbers>ticketNumbersSet.size()) {
@@ -81,7 +90,7 @@ public class GenerateGameHelper {
      * @param numOfPlayers      number of  players in the game
      * @return list of the players in the game.
      */
-    public static List<Player> generatePlayers(int rowsOfTicket, int numOfValuesPerRow, int numberRange, int numOfPlayers) {
+    public List<Player> generatePlayers(int rowsOfTicket, int numOfValuesPerRow, int numberRange, int numOfPlayers) {
         System.out.println("Generating players");
         List<Player> playersInPlay = new ArrayList<>();
         for (int i = 1; i <= numOfPlayers; i++) {
@@ -98,7 +107,7 @@ public class GenerateGameHelper {
         return playersInPlay;
     }
 
-    public static Set<Ticket> getAllTicketsForPlayersInSequence(List<Player> playersInPlay) {
+    public Set<Ticket> getAllTicketsForPlayersInSequence(List<Player> playersInPlay) {
         return playersInPlay.stream().map(Player::getTicket).collect(Collectors.toCollection(LinkedHashSet::new));
     }
 }

@@ -8,7 +8,7 @@ public class HousieBoard {
     private List<Integer> boardNumbers = new ArrayList<>();
     private int numbersMarkedTillNow;
     private int totalNumbersInHousieBoard;
-    private List<TicketNumber> numbersBoard = new ArrayList<>();
+    private List<TicketNumber> allTicketNumbersOnBoard = new ArrayList<>();
 
 
     public int getNumbersMarkedTillNow() {
@@ -27,12 +27,19 @@ public class HousieBoard {
         return boardNumbers;
     }
 
+    public void setBoardNumbers(List<Integer> boardNumbers) {
+        this.boardNumbers = boardNumbers;
+    }
+
     public int getTotalNumbersInHousieBoard() {
         return totalNumbersInHousieBoard;
     }
 
-    public List<TicketNumber> getAllTicketNumbersBoard() {
-        return numbersBoard;
+    public List<TicketNumber> getAllTicketNumbersOnBoard() {
+        return allTicketNumbersOnBoard;
     }
 
+    public void setAllTicketNumbersOnBoard(List<TicketNumber> numbersBoard) {
+        this.allTicketNumbersOnBoard = numbersBoard;
+    }
 }

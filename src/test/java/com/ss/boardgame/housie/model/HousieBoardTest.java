@@ -17,11 +17,13 @@ public class HousieBoardTest {
     private int rows = 3;
     private int columns = 5;
     private int range = 90;
+    private GenerateGameHelper generateGameHelper;
 
     @Before
     public void setUp() {
         housieBoard = new HousieBoard(90);
-        generatedHousieBoardWith90Numbers = GenerateGameHelper.generateBoardNumbers(housieBoard);
+        generateGameHelper = new GenerateGameHelper();
+        generatedHousieBoardWith90Numbers = generateGameHelper.generateBoardNumbers(housieBoard);
     }
 
     @Test
@@ -32,13 +34,13 @@ public class HousieBoardTest {
 
     @Test
     public void getAllTicketNumbersBoardAreNinetyWhenRangeIs90() {
-        assertEquals(housieBoard.getAllTicketNumbersBoard().size(), 90);
+        assertEquals(housieBoard.getAllTicketNumbersOnBoard().size(), 90);
     }
 
     @Test
     public void getAllTicketNumbersBoardAreNinetyWhenRangeIs90AndIsCalledIsFalse() {
-        assertEquals(housieBoard.getAllTicketNumbersBoard().size(), 90);
-        for (TicketNumber ticketNumber : housieBoard.getAllTicketNumbersBoard()) {
+        assertEquals(housieBoard.getAllTicketNumbersOnBoard().size(), 90);
+        for (TicketNumber ticketNumber : housieBoard.getAllTicketNumbersOnBoard()) {
             assertFalse(ticketNumber.getIsCalled());
         }
     }
