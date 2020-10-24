@@ -17,7 +17,10 @@ import java.util.Set;
 
 public class Caller {
 
-    private int numberRange, numOfPlayers, rowsOfTicket, numOfValuesPerRow;
+    private int numberRange;
+    private int numOfPlayers;
+    private int rowsOfTicket;
+    private int numOfValuesPerRow;
     private List<String> earlyFiveWinningPlayers = new ArrayList<>();
     private List<String> topLineWinningPlayers = new ArrayList<>();
     private List<String> fullHouseWinningPlayers = new ArrayList<>();
@@ -38,8 +41,7 @@ public class Caller {
     }
 
     public String startPlaying() {
-        housieBoard = new HousieBoard(numberRange);
-        housieBoard = generateGameHelper.generateBoardNumbers(housieBoard);
+        housieBoard = generateGameHelper.generateBoardNumbers(new HousieBoard(numberRange));
         gameStatus = GameStatus.INPROGRESS;
         winnersList = new WinnersList();
         Scanner scanner = new Scanner(System.in);
@@ -50,8 +52,7 @@ public class Caller {
             System.out.println("Enter N to generate Number or Enter P to Print Current Status of All Tickets");
             char enterCharacter = scanner.next().charAt(0);
             if (enterCharacter == 'N' || enterCharacter == 'n') {
-                int generatedNumber = generateNumber();
-                result = markAllTicketsWithGeneratedNumber(generatedNumber);
+                result = markAllTicketsWithGeneratedNumber(generateNumber());
             }
             if (enterCharacter == 'Q' || enterCharacter == 'q') {
                 gameStatus = GameStatus.GAMEOVER;
@@ -104,8 +105,7 @@ public class Caller {
             winningCombinationsHelper.addWinnerForTopLine(winnersList, topLineWinningPlayers);
         }
         if (!winnersList.getWinnersList().containsKey(WinningCombinations.FULL_HOUSE)) {
-            boolean result = winningCombinationsHelper.addWinnerForFullHouse(winnersList, fullHouseWinningPlayers);
-            if (result) {
+            if (winningCombinationsHelper.addWinnerForFullHouse(winnersList, fullHouseWinningPlayers)) {
                 winnersList.getWinnersList().forEach((key, value) -> {
                     completeWinnerList.append(key).append(" ").append(value);
                     completeWinnerList.append("\n");

@@ -11,8 +11,7 @@ public class HousieApplication {
     public static void main(String[] args) throws UserInputException {
         SpringApplication.run(HousieApplication.class, args);
         UserInputs userInputs = new UserInputs();
-        UserInputs response = userInputs.setUserInputsFromPrompt();
-        Caller caller = new Caller(response);
+        Caller caller = new Caller(userInputs.setUserInputsFromPrompt());
         System.out.println(caller.startPlaying());
     }
 }
