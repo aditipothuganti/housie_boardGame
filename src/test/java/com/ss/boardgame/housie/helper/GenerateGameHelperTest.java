@@ -16,22 +16,27 @@ import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class GenerateGameHelperTest {
+
     private HousieBoard housieBoard;
     private HousieBoard generatedHousieBoardWith90Numbers;
     private int rows = 3;
     private int columns = 5;
     private int range = 90;
 
+    GenerateGameHelper generateGameHelper;
+
+
     @Before
     public void setUp() {
         housieBoard = new HousieBoard(90);
-        generatedHousieBoardWith90Numbers = GenerateGameHelper.generateBoardNumbers(housieBoard);
+        generateGameHelper = new GenerateGameHelper();
+        generatedHousieBoardWith90Numbers = generateGameHelper.generateBoardNumbers(housieBoard);
     }
 
     @Test
     public void test_generateNewNumberWithInGivenRange() {
-        assertTrue(GenerateGameHelper.generateNewNumber(housieBoard) > 0);
-        assertTrue(GenerateGameHelper.generateNewNumber(housieBoard) <= 90);
+        assertTrue(generateGameHelper.generateNewNumber(housieBoard) > 0);
+        assertTrue(generateGameHelper.generateNewNumber(housieBoard) <= 90);
     }
 
     @Test
@@ -44,24 +49,24 @@ public class GenerateGameHelperTest {
     @Test
     public void test_generateBoardNumbersAndCheckThatAllValuesAreMarkedFalseInitially() {
         housieBoard = new HousieBoard(3);
-        HousieBoard generatedHousieWith3Numbers = GenerateGameHelper.generateBoardNumbers(housieBoard);
-        assertEquals(3, generatedHousieWith3Numbers.getAllTicketNumbersBoard().size());
-        assertFalse(generatedHousieWith3Numbers.getAllTicketNumbersBoard().get(0).getIsCalled());
-        assertFalse(generatedHousieWith3Numbers.getAllTicketNumbersBoard().get(1).getIsCalled());
-        assertFalse(generatedHousieWith3Numbers.getAllTicketNumbersBoard().get(2).getIsCalled());
+        HousieBoard generatedHousieWith3Numbers = generateGameHelper.generateBoardNumbers(housieBoard);
+        assertEquals(3, generatedHousieWith3Numbers.getAllTicketNumbersOnBoard().size());
+        assertFalse(generatedHousieWith3Numbers.getAllTicketNumbersOnBoard().get(0).getIsCalled());
+        assertFalse(generatedHousieWith3Numbers.getAllTicketNumbersOnBoard().get(1).getIsCalled());
+        assertFalse(generatedHousieWith3Numbers.getAllTicketNumbersOnBoard().get(2).getIsCalled());
     }
 
     @Test
     public void test_generateTicketDataShouldHaveCorrectRowsAndColumns() {
 
-        List<List<TicketNumber>> ticketGenerated = GenerateGameHelper.generateTicketData(rows, columns, range);
+        List<List<TicketNumber>> ticketGenerated = generateGameHelper.generateTicketData(rows, columns, range);
         assertEquals(ticketGenerated.size(), rows);
         assertEquals(ticketGenerated.get(0).size(), columns);
     }
 
     @Test
     public void test_generateTicketDataShouldHaveIsCalledFalse() {
-        List<List<TicketNumber>> ticketGenerated = GenerateGameHelper.generateTicketData(rows, columns, range);
+        List<List<TicketNumber>> ticketGenerated = generateGameHelper.generateTicketData(rows, columns, range);
         for (List<TicketNumber> ticketLine : ticketGenerated) {
             for (TicketNumber ticketNumber : ticketLine) {
                 assertFalse(ticketNumber.getIsCalled());
@@ -73,7 +78,7 @@ public class GenerateGameHelperTest {
     @Test
     public void generatePlayersAndCheckIfEachPlayerHasSingleTicket() {
         int numOfPlayers = 3;
-        List<Player> playersInGame = GenerateGameHelper.generatePlayers(rows, columns, range, 3);
+        List<Player> playersInGame = generateGameHelper.generatePlayers(rows, columns, range, 3);
         assertEquals(playersInGame.size(), numOfPlayers);
         assertEquals("Player: 1", playersInGame.get(0).getPlayerName());
         assertEquals(playersInGame.get(0).getTicket().getNumberRange(), range);
@@ -83,8 +88,8 @@ public class GenerateGameHelperTest {
 
     @Test
     public void getAllTicketsForPlayersInSequence() {
-        List<Player> playersInGame = GenerateGameHelper.generatePlayers(rows, columns, range, 3);
-        Set<Ticket> ticketsInSequence = GenerateGameHelper.getAllTicketsForPlayersInSequence(playersInGame);
+        List<Player> playersInGame = generateGameHelper.generatePlayers(rows, columns, range, 3);
+        Set<Ticket> ticketsInSequence = generateGameHelper.getAllTicketsForPlayersInSequence(playersInGame);
         assertEquals("Player: 1", ticketsInSequence.iterator().next().getPlayerName());
         assertEquals(3, ticketsInSequence.size());
     }

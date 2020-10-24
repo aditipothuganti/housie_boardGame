@@ -1,4 +1,4 @@
-package com.ss.boardgame.housie.winningCombinations;
+package com.ss.boardgame.housie.model;
 
 import com.ss.boardgame.housie.constants.WinningCombinations;
 
