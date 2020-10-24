@@ -65,7 +65,9 @@ public class Caller {
                 }
             }
         }
+        System.out.println("\n" + "***GAME OVER!! PLAYERS' STATUS***"+"\n");
         System.out.println(winningCombinationsHelper.getAllPlayersStatus(playersInPlay, earlyFiveWinningPlayers, topLineWinningPlayers, fullHouseWinningPlayers));
+        System.out.println("\n" + "***WINNERS LIST***"+"\n");
         scanner.close();
         return result;
     }
