@@ -15,6 +15,7 @@
 * Each time a number is called all the tickets consisting of the number are marked at the appropriate cell index. 
 * The game check for various [ winning combinations ](https://github.com/aditipothuganti/housie_boardGame/blob/master/src/main/java/com/ss/boardgame/housie/constants/WinningCombinations.java) like Early Five, Top Row, Full House to create a list of winners. 
 * The Winning List consists of all the winners who have won a particular combination and are chosen based on the number called out. i.e.; If both Players 1 and Player 3 win Top Line Combination for a particular number then both as noted as winners for that combination. 
+* Various criteria needs to be fulfilled for the combination of inputs to be considered correct. Validity of the input is checked and user is prompted to re-enter the values if they are found to be invalid.
 * The Game is in Progress till the full house is done or until all the numbers are called.  
 * The game can be exited by the user prompt Q to quit the game.
 * We have also provided the functionality to view the tickets of players by entering the value P to display the status of the tickets once the game is in progress.
