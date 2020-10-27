@@ -7,7 +7,7 @@
 
 ## Approach:
 * The Project has been split into models and helper classes for the purpose of modularization. 
-* The [Housie Board Class](https://github.com/aditipothuganti/housie_boardGame/blob/master/src/main/java/com/ss/boardgame/housie/model/HousieBoard.java) is the singleton object initiated when the game begins, to generate the housie board with the range specified by the user.
+* The [Housie Board Class](https://github.com/aditipothuganti/housie_boardGame/blob/master/src/main/java/com/ss/boardgame/housie/model/HousieBoard.java) is initiated when the game begins, to generate the housie board with the range specified by the user.
 * The [Ticket Number](https://github.com/aditipothuganti/housie_boardGame/blob/master/src/main/java/com/ss/boardgame/housie/model/TicketNumber.java) class is used to store the data of each number on the ticket with attributes named number and isCalled. 
 * The [Ticket Class](https://github.com/aditipothuganti/housie_boardGame/blob/master/src/main/java/com/ss/boardgame/housie/model/Ticket.java) is used to build the entire ticket to which a player is assigned. The Ticket class has the number of rows, columns, player name, numbers marked as part of its attributes. All the Ticket Numbers in the ticket are unique and lie within the range specified by the user. 
 * The[ Player Class](https://github.com/aditipothuganti/housie_boardGame/blob/master/src/main/java/com/ss/boardgame/housie/model/Player.java) is modeled to store the player name, the ticket associated the player.  
