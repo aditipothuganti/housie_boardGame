@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
  * A utility class to generate the players, tickets before starting the game.
  */
 @Component
-@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class GenerateGameHelper {
 
     private final static SecureRandom random = new SecureRandom();

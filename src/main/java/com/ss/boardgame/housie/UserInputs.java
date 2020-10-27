@@ -1,11 +1,13 @@
 package com.ss.boardgame.housie;
 
 import com.ss.boardgame.housie.exception.UserInputException;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
 import static com.ss.boardgame.housie.constants.HousieConstants.*;
 
+@Component
 public class UserInputs {
 
     private int numberRange;

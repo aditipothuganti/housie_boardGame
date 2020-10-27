@@ -18,7 +18,6 @@ import java.util.Map;
 import static com.ss.boardgame.housie.constants.HousieConstants.*;
 
 @Component
-@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class WinningCombinationsHelper {
 
     /**

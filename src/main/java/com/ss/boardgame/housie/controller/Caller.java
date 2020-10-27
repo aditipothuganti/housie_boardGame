@@ -9,12 +9,15 @@ import com.ss.boardgame.housie.model.HousieBoard;
 import com.ss.boardgame.housie.model.Player;
 import com.ss.boardgame.housie.model.Ticket;
 import com.ss.boardgame.housie.model.WinnersList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
+@Component
 public class Caller {
 
     private int numberRange;
@@ -29,9 +32,11 @@ public class Caller {
     private GameStatus gameStatus;
     private WinnersList winnersList;
 
-    private GenerateGameHelper generateGameHelper = new GenerateGameHelper();
-    private WinningCombinationsHelper winningCombinationsHelper = new WinningCombinationsHelper();
+    @Autowired
+    GenerateGameHelper generateGameHelper;
 
+    @Autowired
+    WinningCombinationsHelper winningCombinationsHelper;
 
     public Caller(UserInputs userInputs) {
         this.numberRange = userInputs.getNumberRange();
@@ -41,6 +46,8 @@ public class Caller {
     }
 
     public String startPlaying() {
+        generateGameHelper = new GenerateGameHelper();
+        winningCombinationsHelper = new WinningCombinationsHelper();
         housieBoard = generateGameHelper.generateBoardNumbers(new HousieBoard(numberRange));
         gameStatus = GameStatus.INPROGRESS;
         winnersList = new WinnersList();
