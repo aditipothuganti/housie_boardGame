@@ -4,8 +4,6 @@ import com.ss.boardgame.housie.model.HousieBoard;
 import com.ss.boardgame.housie.model.Player;
 import com.ss.boardgame.housie.model.Ticket;
 import com.ss.boardgame.housie.model.TicketNumber;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
