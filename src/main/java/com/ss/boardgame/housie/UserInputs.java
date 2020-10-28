@@ -76,27 +76,15 @@ public class UserInputs {
      * @throws UserInputException if user enters decimal numbers for inputs
      */
     public void checkValidity() throws UserInputException {
-        try {
             if (numOfPlayers <= 0 || rowsOfTicket <= 0 || numOfValuesPerRow <= 0 || numberRange <= 0 || columnsOfTicket <= 0) {
-                throw new UserInputException(INVALID_INPUT_GREATER_THAN_ZERO);
-            }
-        } catch (UserInputException e) {
-            System.out.println(INVALID_INPUT_GREATER_THAN_ZERO + " " + INVALID_INPUT_REPROMPT);
-            setUserInputsFromPrompt();
+                System.out.println(INVALID_INPUT_GREATER_THAN_ZERO + " " + INVALID_INPUT_REPROMPT);
+                setUserInputsFromPrompt();
         }
-        try {
             if (numOfValuesPerRow > columnsOfTicket) {
-                throw new UserInputException(INVALID_INPUT_ROW_VALUES);
-            }
-        } catch (UserInputException e) {
             System.out.println(INVALID_INPUT_ROW_VALUES + " " + INVALID_INPUT_REPROMPT);
             setUserInputsFromPrompt();
         }
-        try {
             if (rowsOfTicket * numOfValuesPerRow > numberRange) {
-                throw new UserInputException(INVALID_INPUT_RANGE_CONDITION);
-            }
-        } catch (UserInputException e) {
             System.out.println(INVALID_INPUT_RANGE_CONDITION + " " + INVALID_INPUT_REPROMPT);
             setUserInputsFromPrompt();
         }

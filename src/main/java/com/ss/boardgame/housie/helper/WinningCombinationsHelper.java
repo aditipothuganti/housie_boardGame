@@ -6,7 +6,6 @@ import com.ss.boardgame.housie.model.Ticket;
 import com.ss.boardgame.housie.model.TicketNumber;
 import com.ss.boardgame.housie.model.WinnersList;
 import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -15,7 +14,6 @@ import java.util.Map;
 
 import static com.ss.boardgame.housie.constants.HousieConstants.*;
 
-@Component
 public class WinningCombinationsHelper {
 
     /**
@@ -24,7 +22,7 @@ public class WinningCombinationsHelper {
      * @param ticket has a List of List of ticket numbers
      * @return true if condition met, false if not met.
      */
-    public boolean checkForEarlyFive(Ticket ticket) {
+    public static boolean checkForEarlyFive(Ticket ticket) {
         return ticket.getNumberOfValuesTickedOff() == 5;
     }
 
@@ -34,7 +32,7 @@ public class WinningCombinationsHelper {
      * @param winnersList    is key value pair of winning combination and winning player.
      * @param winningPlayers List of winners(players) for the combination.
      */
-    public void addWinnerForEarlyFive(WinnersList winnersList, List<String> winningPlayers) {
+    public static void addWinnerForEarlyFive(WinnersList winnersList, List<String> winningPlayers) {
 
         if (!CollectionUtils.isEmpty(winningPlayers))
             winnersList.addWinner(WinningCombinations.EARLY_FIVE, winningPlayers);
@@ -51,7 +49,7 @@ public class WinningCombinationsHelper {
      * @param ticket has a List of List of ticket numbers
      * @return true if condition met, else false.
      */
-    public boolean checkForTopLine(Ticket ticket) {
+    public static boolean checkForTopLine(Ticket ticket) {
         List<TicketNumber> firstRow = ticket.getTicketData().get(0);
         return firstRow.stream().allMatch(TicketNumber::getIsCalled);
     }
@@ -63,7 +61,7 @@ public class WinningCombinationsHelper {
      * @param rowsOfTicket number of rows for each ticket.
      * @return true if condition met, else return false.
      */
-    public boolean checkForFullHouse(Ticket ticket, int rowsOfTicket) {
+    public static boolean checkForFullHouse(Ticket ticket, int rowsOfTicket) {
         Boolean[] rowArray = new Boolean[rowsOfTicket];
         for (int i = 0; i < rowsOfTicket; i++) {
             List<TicketNumber> row = ticket.getTicketData().get(i);
@@ -78,7 +76,7 @@ public class WinningCombinationsHelper {
      * @param winnersList    is key value pair of winning combination and winning player.
      * @param winningPlayers List of winners(players) for the combination.
      */
-    public void addWinnerForTopLine(WinnersList winnersList, List<String> winningPlayers) {
+    public static void addWinnerForTopLine(WinnersList winnersList, List<String> winningPlayers) {
 
         if (!CollectionUtils.isEmpty(winningPlayers)) {
             winnersList.addWinner(WinningCombinations.FIRST_ROW, winningPlayers);
@@ -97,7 +95,7 @@ public class WinningCombinationsHelper {
      * @param winningPlayers List of winners(players) for the combination.
      * @return return true to check winner, and stop game, else continue playing.
      */
-    public boolean addWinnerForFullHouse(WinnersList winnersList, List<String> winningPlayers) {
+    public static boolean addWinnerForFullHouse(WinnersList winnersList, List<String> winningPlayers) {
 
         if (!CollectionUtils.isEmpty(winningPlayers)) {
             winnersList.addWinner(WinningCombinations.FULL_HOUSE, winningPlayers);
@@ -120,7 +118,7 @@ public class WinningCombinationsHelper {
      * @param fullHouseWinningPlayers winners for full house combination.
      * @return String of game summary.
      */
-    public String getAllPlayersStatus(List<Player> playersInPlay, List<String> earlyFiveWinningPlayers, List<String> topLineWinningPlayers, List<String> fullHouseWinningPlayers) {
+    public static String getAllPlayersStatus(List<Player> playersInPlay, List<String> earlyFiveWinningPlayers, List<String> topLineWinningPlayers, List<String> fullHouseWinningPlayers) {
         Map<String, String> endGameStatus = new LinkedHashMap<>();
         StringBuilder completePlayerStatusList = new StringBuilder();
         playersInPlay.forEach(player -> {
