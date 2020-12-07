@@ -1,6 +1,6 @@
 # Welcome to the Housie Game wiki!
 ## Aim :
- `To build the Indian Housie Game, with any number of players, with each player having an individual ticket. 
+ `To build the Housie/Tambola Game, with any number of players, with each player having an individual ticket. 
 ## Features: 
 * The numbers on the housie board can be specified by the user before starting the game.
 * The ticket size ie, rows and columns on the ticket to can be varied based on the on users input. 
